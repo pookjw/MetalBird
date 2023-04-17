@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString * const MetalBirdRendererBundleIdentifier = @"com.pookjw.MetalBirdRenderer";
+
 static NSErrorDomain const MetalBirdRendererErrorDomain = @"MetalBirdRendererErrorDomain";
 
 NS_ERROR_ENUM(MetalBirdRendererErrorDomain) {

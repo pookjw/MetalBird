@@ -1,11 +1,15 @@
+//
+//  grid_shader.metal
+//  MetalBirdRenderer
+//
+//  Created by Jinwoo Kim on 4/17/23.
+//
+
 #include <metal_stdlib>
+#import <MetalBirdRenderer/grid_common.hpp>
 using namespace metal;
 
 namespace grid {
-    struct vertex_in {
-        
-    };
-    
     struct vertex_out {
         float4 position [[position]];
     };
@@ -18,3 +22,4 @@ namespace grid {
         return {};
     }
 };
+

@@ -1,12 +1,14 @@
 //
-//  Renderer.m
+//  Renderer.mm
 //  MetalBirdRenderer
 //
 //  Created by Jinwoo Kim on 4/16/23.
 //
 
-#import "Renderer.h"
-#import "constants.h"
+#import <MetalBirdRenderer/Renderer.h>
+#import <MetalBirdRenderer/constants.h>
+#import <MetalBirdRenderer/GridRenderer.hpp>
+#import <memory>
 
 /*
  TODO:
@@ -21,7 +23,7 @@
 @property (strong) id<MTLCommandQueue> commandQueue;
 @property (strong) id<MTLLibrary> library;
 
-@property (strong) id<MTLRenderPipelineState> gridPipelineState;
+@property (assign) std::shared_ptr<GridRenderer> gridRenderer;
 @end
 
 @implementation Renderer
@@ -46,8 +48,7 @@
         id<MTLDevice> device = MTLCreateSystemDefaultDevice();
         id<MTLCommandQueue> commandQueue = [device newCommandQueue];
         
-        NSURL *bundleURL = [[NSBundle.mainBundle.bundleURL URLByAppendingPathComponent:@"MetalBirdRenderer_MetalBirdRenderer" isDirectory:YES] URLByAppendingPathExtension:@"bundle"];
-        NSBundle *bundle = [[NSBundle alloc] initWithURL:bundleURL];
+        NSBundle *bundle = [NSBundle bundleWithIdentifier:MetalBirdRendererBundleIdentifier];
         id<MTLLibrary> library = [device newDefaultLibraryWithBundle:bundle error:&error];
         if (error) {
             completionHandler(error);
@@ -67,7 +68,7 @@
         
         //
         
-        [self setupGridPipelineStateWithError:&error];
+        self.gridRenderer = std::shared_ptr<GridRenderer>(new GridRenderer(mtkView, device, library, &error));
         if (error) {
             completionHandler(error);
             return;
@@ -104,20 +105,42 @@
     gridPipelineDescriptor.vertexFunction = vertexFunction;
     gridPipelineDescriptor.fragmentFunction = fragmentFunction;
     gridPipelineDescriptor.colorAttachments[0].pixelFormat = self.mtkView.colorPixelFormat;
-//    gridPipelineDescriptor.vertexDescriptor = /* TODO */;
+    
+    MTLVertexDescriptor *vertexDescriptor = [MTLVertexDescriptor new];
+    vertexDescriptor.attributes[0].format = MTLVertexFormatFloat2;
+    vertexDescriptor.attributes[0].offset = 0;
+    vertexDescriptor.attributes[0].bufferIndex = 0;
+    vertexDescriptor.layouts[0].stride = sizeof(simd_float3);
+    
+    gridPipelineDescriptor.vertexDescriptor = vertexDescriptor;
     
     id<MTLRenderPipelineState> gridPipelineState = [self.device newRenderPipelineStateWithDescriptor:gridPipelineDescriptor error:error];
     if (*error) {
         return NO;
     }
     
-    self.gridPipelineState = gridPipelineState;
+//    self.gridPipelineState = gridPipelineState;
     
     return YES;
 }
 
-- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size { 
-    
+- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
+    [self.queue addOperationWithBlock:^{
+        id<MTLCommandBuffer> commandBuffer = self.commandQueue.commandBuffer;
+        MTLRenderPassDescriptor *descriptor = view.currentRenderPassDescriptor;
+        id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
+        
+        //
+        
+        self->_gridRenderer.get()->renderWithEncoder(renderEncoder, size);
+        
+        //
+        
+        [renderEncoder endEncoding];
+        id<CAMetalDrawable> drawable = view.currentDrawable;
+        [commandBuffer presentDrawable:drawable];
+        [commandBuffer commit];
+    }];
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view { 

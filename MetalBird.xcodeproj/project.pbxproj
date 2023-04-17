@@ -12,8 +12,32 @@
 		4F9948A029EC39F400A7B116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F99489F29EC39F400A7B116 /* Assets.xcassets */; };
 		4F9948A329EC39F400A7B116 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F9948A229EC39F400A7B116 /* Preview Assets.xcassets */; };
 		4F9948D629EC3F7E00A7B116 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9948D529EC3F7E00A7B116 /* GameView.swift */; };
-		4F9948E029EC48F000A7B116 /* MetalBirdRenderer in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9948DF29EC48F000A7B116 /* MetalBirdRenderer */; };
+		4FAEC79A29ED8D3A005B696C /* MetalBirdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC79929ED8D3A005B696C /* MetalBirdRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FAEC79D29ED8D3A005B696C /* MetalBirdRenderer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */; };
+		4FAEC79E29ED8D3A005B696C /* MetalBirdRenderer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4FAEC7A529ED8D5D005B696C /* constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7A229ED8D5D005B696C /* constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FAEC7A629ED8D5D005B696C /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7A329ED8D5D005B696C /* Renderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FAEC7A729ED8D5D005B696C /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7A429ED8D5D005B696C /* Renderer.mm */; };
+		4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7A829ED8D89005B696C /* bird_shader.metal */; };
+		4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7AA29ED8D91005B696C /* grid_shader.metal */; };
+		4FAEC7B029ED950E005B696C /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7AF29ED950E005B696C /* Metal.framework */; };
+		4FAEC7B229ED95A6005B696C /* grid_common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7B129ED9543005B696C /* grid_common.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4FAEC7B629ED9ACD005B696C /* BaseRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7B429ED9ACD005B696C /* BaseRenderer.mm */; };
+		4FAEC7B729ED9ACD005B696C /* BaseRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7B529ED9ACD005B696C /* BaseRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7B829ED9C75005B696C /* GridRenderer.mm */; };
+		4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4FAEC7BF29EDA2E7005B696C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4FAEC79B29ED8D3A005B696C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F99489029EC39F300A7B116 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FAEC79629ED8D3A005B696C;
+			remoteInfo = MetalBirdRenderer;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4F9948B929EC3A0500A7B116 /* Embed Frameworks */ = {
@@ -22,6 +46,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4FAEC79E29ED8D3A005B696C /* MetalBirdRenderer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -35,7 +60,23 @@
 		4F99489F29EC39F400A7B116 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F9948A229EC39F400A7B116 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4F9948D529EC3F7E00A7B116 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		4F9948DE29EC48E000A7B116 /* MetalBirdRenderer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MetalBirdRenderer; sourceTree = "<group>"; };
+		4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetalBirdRenderer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FAEC79929ED8D3A005B696C /* MetalBirdRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalBirdRenderer.h; sourceTree = "<group>"; };
+		4FAEC7A229ED8D5D005B696C /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		4FAEC7A329ED8D5D005B696C /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		4FAEC7A429ED8D5D005B696C /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		4FAEC7A829ED8D89005B696C /* bird_shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = bird_shader.metal; sourceTree = "<group>"; };
+		4FAEC7AA29ED8D91005B696C /* grid_shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = grid_shader.metal; sourceTree = "<group>"; };
+		4FAEC7AC29ED94F3005B696C /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		4FAEC7AE29ED94FC005B696C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		4FAEC7AF29ED950E005B696C /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		4FAEC7B129ED9543005B696C /* grid_common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = grid_common.hpp; sourceTree = "<group>"; };
+		4FAEC7B429ED9ACD005B696C /* BaseRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseRenderer.mm; sourceTree = "<group>"; };
+		4FAEC7B529ED9ACD005B696C /* BaseRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseRenderer.hpp; sourceTree = "<group>"; };
+		4FAEC7B829ED9C75005B696C /* GridRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GridRenderer.mm; sourceTree = "<group>"; };
+		4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GridRenderer.hpp; sourceTree = "<group>"; };
+		4FAEC7BC29EDA2DE005B696C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +84,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F9948E029EC48F000A7B116 /* MetalBirdRenderer in Frameworks */,
+				4FAEC79D29ED8D3A005B696C /* MetalBirdRenderer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FAEC79429ED8D3A005B696C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FAEC7BF29EDA2E7005B696C /* CoreGraphics.framework in Frameworks */,
+				4FAEC7B029ED950E005B696C /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,8 +103,8 @@
 		4F99488F29EC39F300A7B116 = {
 			isa = PBXGroup;
 			children = (
-				4F9948DE29EC48E000A7B116 /* MetalBirdRenderer */,
 				4F99489A29EC39F300A7B116 /* MetalBird */,
+				4FAEC79829ED8D3A005B696C /* MetalBirdRenderer */,
 				4F99489929EC39F300A7B116 /* Products */,
 				4F9948DA29EC482F00A7B116 /* Frameworks */,
 			);
@@ -64,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				4F99489829EC39F300A7B116 /* MetalBird.app */,
+				4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,11 +142,58 @@
 		4F9948DA29EC482F00A7B116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */,
+				4FAEC7BC29EDA2DE005B696C /* UIKit.framework */,
+				4FAEC7AF29ED950E005B696C /* Metal.framework */,
+				4FAEC7AE29ED94FC005B696C /* libc++.tbd */,
+				4FAEC7AC29ED94F3005B696C /* MetalKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4FAEC79829ED8D3A005B696C /* MetalBirdRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				4FAEC79929ED8D3A005B696C /* MetalBirdRenderer.h */,
+				4FAEC7A229ED8D5D005B696C /* constants.h */,
+				4FAEC7A329ED8D5D005B696C /* Renderer.h */,
+				4FAEC7A429ED8D5D005B696C /* Renderer.mm */,
+				4FAEC7B329ED9AB0005B696C /* renderers */,
+				4FAEC7B129ED9543005B696C /* grid_common.hpp */,
+				4FAEC7AA29ED8D91005B696C /* grid_shader.metal */,
+				4FAEC7A829ED8D89005B696C /* bird_shader.metal */,
+			);
+			path = MetalBirdRenderer;
+			sourceTree = "<group>";
+		};
+		4FAEC7B329ED9AB0005B696C /* renderers */ = {
+			isa = PBXGroup;
+			children = (
+				4FAEC7B529ED9ACD005B696C /* BaseRenderer.hpp */,
+				4FAEC7B429ED9ACD005B696C /* BaseRenderer.mm */,
+				4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */,
+				4FAEC7B829ED9C75005B696C /* GridRenderer.mm */,
+			);
+			path = renderers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4FAEC79229ED8D3A005B696C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
+				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
+				4FAEC7A629ED8D5D005B696C /* Renderer.h in Headers */,
+				4FAEC79A29ED8D3A005B696C /* MetalBirdRenderer.h in Headers */,
+				4FAEC7B729ED9ACD005B696C /* BaseRenderer.hpp in Headers */,
+				4FAEC7B229ED95A6005B696C /* grid_common.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		4F99489729EC39F300A7B116 /* MetalBird */ = {
@@ -110,14 +208,32 @@
 			buildRules = (
 			);
 			dependencies = (
+				4FAEC79C29ED8D3A005B696C /* PBXTargetDependency */,
 			);
 			name = MetalBird;
 			packageProductDependencies = (
-				4F9948DF29EC48F000A7B116 /* MetalBirdRenderer */,
 			);
 			productName = MetalBird;
 			productReference = 4F99489829EC39F300A7B116 /* MetalBird.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4FAEC79629ED8D3A005B696C /* MetalBirdRenderer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FAEC7A129ED8D3A005B696C /* Build configuration list for PBXNativeTarget "MetalBirdRenderer" */;
+			buildPhases = (
+				4FAEC79229ED8D3A005B696C /* Headers */,
+				4FAEC79329ED8D3A005B696C /* Sources */,
+				4FAEC79429ED8D3A005B696C /* Frameworks */,
+				4FAEC79529ED8D3A005B696C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetalBirdRenderer;
+			productName = MetalBirdRenderer;
+			productReference = 4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -130,6 +246,9 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					4F99489729EC39F300A7B116 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					4FAEC79629ED8D3A005B696C = {
 						CreatedOnToolsVersion = 14.3;
 					};
 				};
@@ -148,6 +267,7 @@
 			projectRoot = "";
 			targets = (
 				4F99489729EC39F300A7B116 /* MetalBird */,
+				4FAEC79629ED8D3A005B696C /* MetalBirdRenderer */,
 			);
 		};
 /* End PBXProject section */
@@ -159,6 +279,13 @@
 			files = (
 				4F9948A329EC39F400A7B116 /* Preview Assets.xcassets in Resources */,
 				4F9948A029EC39F400A7B116 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FAEC79529ED8D3A005B696C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +302,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4FAEC79329ED8D3A005B696C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FAEC7A729ED8D5D005B696C /* Renderer.mm in Sources */,
+				4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */,
+				4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */,
+				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,
+				4FAEC7B629ED9ACD005B696C /* BaseRenderer.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4FAEC79C29ED8D3A005B696C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4FAEC79629ED8D3A005B696C /* MetalBirdRenderer */;
+			targetProxy = 4FAEC79B29ED8D3A005B696C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4F9948A429EC39F400A7B116 /* Debug */ = {
@@ -235,6 +382,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Debug;
 		};
@@ -288,6 +436,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -350,6 +499,74 @@
 			};
 			name = Release;
 		};
+		4FAEC79F29ED8D3A005B696C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBirdRenderer;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4FAEC7A029ED8D3A005B696C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBirdRenderer;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -371,14 +588,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-/* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4F9948DF29EC48F000A7B116 /* MetalBirdRenderer */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MetalBirdRenderer;
+		4FAEC7A129ED8D3A005B696C /* Build configuration list for PBXNativeTarget "MetalBirdRenderer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FAEC79F29ED8D3A005B696C /* Debug */,
+				4FAEC7A029ED8D3A005B696C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-/* End XCSwiftPackageProductDependency section */
+/* End XCConfigurationList section */
 	};
 	rootObject = 4F99489029EC39F300A7B116 /* Project object */;
 }

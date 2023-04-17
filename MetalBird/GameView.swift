@@ -26,15 +26,22 @@ struct GameView: UIViewRepresentable {
     
     actor Coordinator {
         fileprivate let mtkView: MTKView
-        private let renderer: Renderer = .init()
+        private let renderer: Renderer
+        private let setupTask: Task<Void, Never>
         
         init(mtkView: MTKView) {
-            self.mtkView = mtkView
-            
-            Task { @MainActor in
-                
-                try! await Renderer().setup(mtkView: .init())
+            let renderer: Renderer = .init()
+            let setupTask: Task<Void, Never> = .init {
+                try! await renderer.setup(mtkView: mtkView)
             }
+            
+            self.mtkView = mtkView
+            self.renderer = renderer
+            self.setupTask = setupTask
+        }
+        
+        deinit {
+            setupTask.cancel()
         }
     }
 }
