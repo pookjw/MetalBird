@@ -85,45 +85,6 @@
     self.queue = queue;
 }
 
-- (BOOL)setupGridPipelineStateWithError:(NSError * _Nullable __autoreleasing *)error {
-    MTLFunctionDescriptor *vertexFunctionDescriptor = [MTLFunctionDescriptor functionDescriptor];
-    vertexFunctionDescriptor.name = @"grid::vertex_main";
-    
-    id<MTLFunction> vertexFunction = [self.library newFunctionWithDescriptor:vertexFunctionDescriptor error:error];
-    if (*error) {
-        return NO;
-    }
-    
-    MTLFunctionDescriptor *fragmentFunctionDescriptor = [MTLFunctionDescriptor functionDescriptor];
-    fragmentFunctionDescriptor.name = @"grid::fragment_main";
-    id<MTLFunction> fragmentFunction = [self.library newFunctionWithDescriptor:fragmentFunctionDescriptor error:error];
-    if (*error) {
-        return NO;
-    }
-    
-    MTLRenderPipelineDescriptor *gridPipelineDescriptor = [MTLRenderPipelineDescriptor new];
-    gridPipelineDescriptor.vertexFunction = vertexFunction;
-    gridPipelineDescriptor.fragmentFunction = fragmentFunction;
-    gridPipelineDescriptor.colorAttachments[0].pixelFormat = self.mtkView.colorPixelFormat;
-    
-    MTLVertexDescriptor *vertexDescriptor = [MTLVertexDescriptor new];
-    vertexDescriptor.attributes[0].format = MTLVertexFormatFloat2;
-    vertexDescriptor.attributes[0].offset = 0;
-    vertexDescriptor.attributes[0].bufferIndex = 0;
-    vertexDescriptor.layouts[0].stride = sizeof(simd_float3);
-    
-    gridPipelineDescriptor.vertexDescriptor = vertexDescriptor;
-    
-    id<MTLRenderPipelineState> gridPipelineState = [self.device newRenderPipelineStateWithDescriptor:gridPipelineDescriptor error:error];
-    if (*error) {
-        return NO;
-    }
-    
-//    self.gridPipelineState = gridPipelineState;
-    
-    return YES;
-}
-
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
     [self.queue addOperationWithBlock:^{
         id<MTLCommandBuffer> commandBuffer = self.commandQueue.commandBuffer;
