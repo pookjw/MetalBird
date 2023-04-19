@@ -14,9 +14,16 @@ BaseRenderer::BaseRenderer(
                            NSError * _Nullable __autoreleasing * error
                            )
 {
+    this->mtkView = mtkView;
+    this->device = device;
+    this->library = library;
+    this->commandQueue = device.newCommandQueue;
+}
+
+void BaseRenderer::mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size) {
     
 }
 
-void BaseRenderer::renderWithEncoder(id<MTLRenderCommandEncoder> encoder, CGSize size) {
+void BaseRenderer::drawInMTKView(MTKView *mtkView) {
     
 }

@@ -19,11 +19,10 @@
  */
 
 @interface Renderer () <MTKViewDelegate>
-@property (strong, nullable) MTKView *mtkView;
 @property (strong) NSOperationQueue *queue;
 
+@property (strong, nullable) MTKView *mtkView;
 @property (strong) id<MTLDevice> device;
-@property (strong) id<MTLCommandQueue> commandQueue;
 @property (strong) id<MTLLibrary> library;
 
 @property (assign) std::shared_ptr<std::vector<std::shared_ptr<BaseRenderer>>> renderers;
@@ -49,7 +48,6 @@
         NSError * _Nullable __autoreleasing error = nil;
         
         id<MTLDevice> device = MTLCreateSystemDefaultDevice();
-        id<MTLCommandQueue> commandQueue = [device newCommandQueue];
         
         NSBundle *bundle = [NSBundle bundleWithIdentifier:MetalBirdRendererBundleIdentifier];
         id<MTLLibrary> library = [device newDefaultLibraryWithBundle:bundle error:&error];
@@ -66,7 +64,6 @@
         
         self.mtkView = mtkView;
         self.device = device;
-        self.commandQueue = commandQueue;
         self.library = library;
         
         //
@@ -93,27 +90,18 @@
 
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
     [self.queue addOperationWithBlock:^{
-        id<MTLCommandBuffer> commandBuffer = self.commandQueue.commandBuffer;
-        MTLRenderPassDescriptor *descriptor = view.currentRenderPassDescriptor;
-        id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
-        
-        //
-        
-        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&renderEncoder, &size](std::shared_ptr<BaseRenderer> ptr) {
-            ptr.get()->renderWithEncoder(renderEncoder, size);
+        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&view, &size](std::shared_ptr<BaseRenderer> ptr) {
+            ptr.get()->mtkView_drawableSizeWillChange(view, size);
         });
-        
-        //
-        
-        [renderEncoder endEncoding];
-        id<CAMetalDrawable> drawable = view.currentDrawable;
-        [commandBuffer presentDrawable:drawable];
-        [commandBuffer commit];
     }];
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view { 
-    
+    [self.queue addOperationWithBlock:^{
+        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&view](std::shared_ptr<BaseRenderer> ptr) {
+            ptr.get()->drawInMTKView(view);
+        });
+    }];
 }
 
 @end

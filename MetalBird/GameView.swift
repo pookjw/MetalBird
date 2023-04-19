@@ -19,17 +19,17 @@ struct GameView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        let mtkView: MTKView = .init()
+        let mtkView: DynamicMTKView = .init()
         let coordinator: Coordinator = .init(mtkView: mtkView)
         return coordinator
     }
     
     actor Coordinator {
-        fileprivate let mtkView: MTKView
+        fileprivate let mtkView: DynamicMTKView
         private let renderer: Renderer
         private let setupTask: Task<Void, Never>
         
-        init(mtkView: MTKView) {
+        init(mtkView: DynamicMTKView) {
             let renderer: Renderer = .init()
             let setupTask: Task<Void, Never> = .init {
                 try! await renderer.setup(mtkView: mtkView)

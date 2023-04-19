@@ -18,16 +18,12 @@ GridRenderer::GridRenderer(
     vertexFunctionDescriptor.name = @"grid::vertex_main";
     
     id<MTLFunction> vertexFunction = [library newFunctionWithDescriptor:vertexFunctionDescriptor error:error];
-    if (*error) {
-        return;
-    }
+    if (*error) return;
     
     MTLFunctionDescriptor *fragmentFunctionDescriptor = [MTLFunctionDescriptor functionDescriptor];
     fragmentFunctionDescriptor.name = @"grid::fragment_main";
     id<MTLFunction> fragmentFunction = [library newFunctionWithDescriptor:fragmentFunctionDescriptor error:error];
-    if (*error) {
-        return;
-    }
+    if (*error) return;
     
     std::array<simd_float2, GRID_RENDERER_COUNT> coords = this->makeCoords();
     std::array<ushort, GRID_RENDERER_COUNT> indices = this->makeIndices();
@@ -57,22 +53,35 @@ GridRenderer::GridRenderer(
     this->indicesBuffer = indicesBuffer;
 }
 
-void GridRenderer::renderWithEncoder(id<MTLRenderCommandEncoder> encoder, CGSize size) {
-    BaseRenderer::renderWithEncoder(encoder, size);
+void GridRenderer::mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size) {
+    BaseRenderer::mtkView_drawableSizeWillChange(mtkView, size);
     
-    [encoder setRenderPipelineState:this->pipelineState];
+    id<MTLCommandBuffer> commandBuffer = this->commandQueue.commandBuffer;
+    MTLRenderPassDescriptor *descriptor = mtkView.currentRenderPassDescriptor;
+    id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
     
-    [encoder setVertexBuffer:this->coordsBuffer offset:0 atIndex:0];
+    [renderEncoder setRenderPipelineState:this->pipelineState];
+    
+    [renderEncoder setVertexBuffer:this->coordsBuffer offset:0 atIndex:0];
     
     for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i++) {
         @autoreleasepool {
-            [encoder drawIndexedPrimitives:MTLPrimitiveTypeLine
+            [renderEncoder drawIndexedPrimitives:MTLPrimitiveTypeLine
                                 indexCount:2
                                  indexType:MTLIndexTypeUInt16
                                indexBuffer:this->indicesBuffer
                          indexBufferOffset:sizeof(std::tuple_element<0, decltype(this->indices)>::type) * i * 2];
         }
     }
+    
+    [renderEncoder endEncoding];
+    id<CAMetalDrawable> drawable = mtkView.currentDrawable;
+    [commandBuffer presentDrawable:drawable];
+    [commandBuffer commit];
+}
+
+void GridRenderer::drawInMTKView(MTKView *mtkView) {
+    BaseRenderer::drawInMTKView(mtkView);
 }
 
 std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {

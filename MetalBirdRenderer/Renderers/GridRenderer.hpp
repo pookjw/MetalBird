@@ -14,15 +14,17 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 class GridRenderer : public BaseRenderer {
-    using BaseRenderer;
 public:
+    using BaseRenderer::BaseRenderer;
+    
     GridRenderer(
                  MTKView *mtkView,
                  id<MTLDevice> device,
                  id<MTLLibrary> library,
                  NSError * _Nullable __autoreleasing * error
                  );
-    void renderWithEncoder(id<MTLRenderCommandEncoder> encoder, CGSize size);
+    void mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size);
+    void drawInMTKView(MTKView *mtkView);
 private:
     id<MTLRenderPipelineState> pipelineState;
     std::array<simd_float2, GRID_RENDERER_COUNT> coords;

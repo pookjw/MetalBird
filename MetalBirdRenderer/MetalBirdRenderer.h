@@ -7,3 +7,4 @@
 
 #import <MetalBirdRenderer/Renderer.h>
 #import <MetalBirdRenderer/constants.h>
+#import <MetalBirdRenderer/DynamicMTKView.h>

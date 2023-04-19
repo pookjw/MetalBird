@@ -28,6 +28,12 @@
 		4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7B829ED9C75005B696C /* GridRenderer.mm */; };
 		4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		4FAEC7BF29EDA2E7005B696C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */; };
+		4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FB90AE829F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FB90AE929F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm */; };
+		4FB90AEC29F03C7F00EE37A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BC29EDA2DE005B696C /* UIKit.framework */; };
+		4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FB90AF329F03D7500EE37A4 /* DynamicMTKView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FB90AF629F03D7500EE37A4 /* DynamicMTKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FB90AF429F03D7500EE37A4 /* DynamicMTKView.mm */; };
+		4FB90AF729F03DAB00EE37A4 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7AC29ED94F3005B696C /* MetalKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +85,11 @@
 		4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GridRenderer.hpp; sourceTree = "<group>"; };
 		4FAEC7BC29EDA2DE005B696C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		4FB90AE829F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "UIWindowScene+UIWindowDidChangeScreenNotification.hpp"; sourceTree = "<group>"; };
+		4FB90AE929F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIWindowScene+UIWindowDidChangeScreenNotification.mm"; sourceTree = "<group>"; };
+		4FB90AF329F03D7500EE37A4 /* DynamicMTKView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicMTKView.h; sourceTree = "<group>"; };
+		4FB90AF429F03D7500EE37A4 /* DynamicMTKView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DynamicMTKView.mm; sourceTree = "<group>"; };
+		4FB90AF829F03DC600EE37A4 /* MetalBird.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetalBird.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +106,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FAEC7BF29EDA2E7005B696C /* CoreGraphics.framework in Frameworks */,
+				4FB90AF729F03DAB00EE37A4 /* MetalKit.framework in Frameworks */,
+				4FB90AEC29F03C7F00EE37A4 /* UIKit.framework in Frameworks */,
 				4FAEC7B029ED950E005B696C /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +137,7 @@
 		4F99489A29EC39F300A7B116 /* MetalBird */ = {
 			isa = PBXGroup;
 			children = (
+				4FB90AF829F03DC600EE37A4 /* MetalBird.entitlements */,
 				4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */,
 				4F99489D29EC39F300A7B116 /* ContentView.swift */,
 				4F9948D529EC3F7E00A7B116 /* GameView.swift */,
@@ -160,14 +174,16 @@
 				4FAEC7A229ED8D5D005B696C /* constants.h */,
 				4FAEC7A329ED8D5D005B696C /* Renderer.h */,
 				4FAEC7A429ED8D5D005B696C /* Renderer.mm */,
-				4FAEC7B329ED9AB0005B696C /* renderers */,
-				4FAEC7AA29ED8D91005B696C /* grid_shader.metal */,
-				4FAEC7A829ED8D89005B696C /* bird_shader.metal */,
+				4FB90AF329F03D7500EE37A4 /* DynamicMTKView.h */,
+				4FB90AF429F03D7500EE37A4 /* DynamicMTKView.mm */,
+				4FB90AE729F03C2600EE37A4 /* Categories */,
+				4FAEC7B329ED9AB0005B696C /* Renderers */,
+				4FB90ABE29F026ED00EE37A4 /* Shaders */,
 			);
 			path = MetalBirdRenderer;
 			sourceTree = "<group>";
 		};
-		4FAEC7B329ED9AB0005B696C /* renderers */ = {
+		4FAEC7B329ED9AB0005B696C /* Renderers */ = {
 			isa = PBXGroup;
 			children = (
 				4FAEC7B529ED9ACD005B696C /* BaseRenderer.hpp */,
@@ -177,7 +193,25 @@
 				4F1B92EB29EF8A18000A8974 /* BirdRenderer.hpp */,
 				4F1B92EA29EF8A18000A8974 /* BirdRenderer.mm */,
 			);
-			path = renderers;
+			path = Renderers;
+			sourceTree = "<group>";
+		};
+		4FB90ABE29F026ED00EE37A4 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				4FAEC7AA29ED8D91005B696C /* grid_shader.metal */,
+				4FAEC7A829ED8D89005B696C /* bird_shader.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		4FB90AE729F03C2600EE37A4 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4FB90AE829F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp */,
+				4FB90AE929F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +221,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp in Headers */,
 				4F1B92ED29EF8A18000A8974 /* BirdRenderer.hpp in Headers */,
+				4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */,
 				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
 				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
 				4FAEC7A629ED8D5D005B696C /* Renderer.h in Headers */,
@@ -253,6 +289,7 @@
 					};
 					4FAEC79629ED8D3A005B696C = {
 						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -313,8 +350,10 @@
 				4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */,
 				4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */,
 				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,
+				4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm in Sources */,
 				4FAEC7B629ED9ACD005B696C /* BaseRenderer.mm in Sources */,
 				4F1B92EC29EF8A18000A8974 /* BirdRenderer.mm in Sources */,
+				4FB90AF629F03D7500EE37A4 /* DynamicMTKView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MetalBird/MetalBird.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MetalBird/Preview Content\"";
@@ -468,6 +508,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -479,6 +522,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MetalBird/MetalBird.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MetalBird/Preview Content\"";
@@ -497,6 +541,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -506,6 +553,7 @@
 		4FAEC79F29ED8D3A005B696C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -531,6 +579,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -540,6 +590,7 @@
 		4FAEC7A029ED8D3A005B696C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -565,6 +616,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
