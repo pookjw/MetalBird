@@ -29,6 +29,9 @@ GridRenderer::GridRenderer(
         return;
     }
     
+    std::array<simd_float2, GRID_RENDERER_COUNT> coords = this->makeCoords();
+    std::array<ushort, GRID_RENDERER_COUNT> indices = this->makeIndices();
+    
     MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
     pipelineDescriptor.vertexFunction = vertexFunction;
     pipelineDescriptor.fragmentFunction = fragmentFunction;
@@ -38,19 +41,20 @@ GridRenderer::GridRenderer(
     vertexDescriptor.attributes[0].format = MTLVertexFormatFloat2;
     vertexDescriptor.attributes[0].offset = 0;
     vertexDescriptor.attributes[0].bufferIndex = 0;
-    vertexDescriptor.layouts[0].stride = sizeof(simd_float3);
+    vertexDescriptor.layouts[0].stride = sizeof(std::tuple_element<0, decltype(coords)>::type);
     
     pipelineDescriptor.vertexDescriptor = vertexDescriptor;
     
     id<MTLRenderPipelineState> pipelineState = [device newRenderPipelineStateWithDescriptor:pipelineDescriptor error:error];
-    std::array<simd_float2, GRID_RENDERER_COUNT> coords = this->makeCoords();
-    std::array<simd_float2, GRID_RENDERER_COUNT> indices = this->makeIndices();
     
-    id<MTLBuffer> coordsBuffer = [device newBufferWithBytes:<#(nonnull const void *)#> length:<#(NSUInteger)#> options:<#(MTLResourceOptions)#>]
+    id<MTLBuffer> coordsBuffer = [device newBufferWithBytes:coords.data() length:coords.max_size() * sizeof(std::tuple_element<0, decltype(coords)>::type) options:0];
+    id<MTLBuffer> indicesBuffer = [device newBufferWithBytes:indices.data() length:indices.max_size() * sizeof(std::tuple_element<0, decltype(indices)>::type) options:0];
     
     this->pipelineState = pipelineState;
-    this->coords = this->makeCoords();
-    this->indices = this->makeIndices();
+    this->coords = coords;
+    this->indices = indices;
+    this->coordsBuffer = coordsBuffer;
+    this->indicesBuffer = indicesBuffer;
 }
 
 void GridRenderer::renderWithEncoder(id<MTLRenderCommandEncoder> encoder, CGSize size) {
@@ -58,31 +62,26 @@ void GridRenderer::renderWithEncoder(id<MTLRenderCommandEncoder> encoder, CGSize
     
     [encoder setRenderPipelineState:this->pipelineState];
     
-    [encoder setVertexBuffer:self.coordsBuffer offset:0 atIndex:0];
+    [encoder setVertexBuffer:this->coordsBuffer offset:0 atIndex:0];
     
-    for (NSUInteger i = 0; i < (GRID_BLOCK_COUNT - 1) * 2; i++) {
+    for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i++) {
         @autoreleasepool {
-            [renderEncoder drawIndexedPrimitives:MTLPrimitiveTypeLine
-                                      indexCount:2
-                                       indexType:MTLIndexTypeUInt16
-                                     indexBuffer:self.indicesBuffer
-                               indexBufferOffset:sizeof(ushort) * i * 2];
+            [encoder drawIndexedPrimitives:MTLPrimitiveTypeLine
+                                indexCount:2
+                                 indexType:MTLIndexTypeUInt16
+                               indexBuffer:this->indicesBuffer
+                         indexBufferOffset:sizeof(std::tuple_element<0, decltype(this->indices)>::type) * i * 2];
         }
     }
-    
-    //
-    
-    [renderEncoder endEncoding];
-    id<CAMetalDrawable> drawable = [view currentDrawable];
-    [commandBuffer presentDrawable:drawable];
-    [commandBuffer commit];
 }
 
 std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
     std::array<simd_float2, GRID_RENDERER_COUNT> results {};
     
+    float unit = 1.f / GRID_RENDERER_LENGTH;
+    
     for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i = i + 2) {
-        float coord = -1.f + static_cast<float>(i + 2);
+        float coord = -1.f + unit * static_cast<float>(i + 2);
         
         results.at(i) = simd_make_float2(-1.f, coord);
         results.at(i + 1) = simd_make_float2(1.f, coord);
@@ -93,8 +92,8 @@ std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
     return results;
 }
 
-std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeIndices() {
-    std::array<simd_float2, GRID_RENDERER_COUNT> results {};
+std::array<ushort, GRID_RENDERER_COUNT> GridRenderer::makeIndices() {
+    std::array<ushort, GRID_RENDERER_COUNT> results {};
     
     for (ushort i = 0; i < GRID_RENDERER_COUNT; i++) {
         results.at(i) = i;

@@ -26,12 +26,12 @@ public:
 private:
     id<MTLRenderPipelineState> pipelineState;
     std::array<simd_float2, GRID_RENDERER_COUNT> coords;
-    std::array<simd_float2, GRID_RENDERER_COUNT> indices;
+    std::array<ushort, GRID_RENDERER_COUNT> indices;
     id<MTLBuffer> coordsBuffer;
     id<MTLBuffer> indicesBuffer;
     
     std::array<simd_float2, GRID_RENDERER_COUNT> makeCoords();
-    std::array<simd_float2, GRID_RENDERER_COUNT> makeIndices();
+    std::array<ushort, GRID_RENDERER_COUNT> makeIndices();
 };
 
 NS_HEADER_AUDIT_END(nullability, sendability)

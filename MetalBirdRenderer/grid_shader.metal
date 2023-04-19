@@ -6,20 +6,15 @@
 //
 
 #import <metal_stdlib>
-#import <MetalBirdRenderer/grid_common.hpp>
 using namespace metal;
 
 namespace grid {
-    struct vertex_out {
-        float4 position [[position]];
-    };
-    
-    vertex vertex_out vertex_main(vertex_in in [[stage_in]]) {
-        return {};
+    vertex float4 vertex_main(simd_float2 position [[attribute(0)]] [[stage_in]]) {
+        return float4(position, 0.f, 1.f);
     }
     
-    fragment float4 fragment_main(vertex_out out [[stage_in]]) {
-        return {};
+    fragment float4 fragment_main() {
+        return float4(0.f, 0.f, 0.f, 1.f);
     }
 };
 
