@@ -43,22 +43,61 @@ GridRenderer::GridRenderer(
     pipelineDescriptor.vertexDescriptor = vertexDescriptor;
     
     id<MTLRenderPipelineState> pipelineState = [device newRenderPipelineStateWithDescriptor:pipelineDescriptor error:error];
+    std::array<simd_float2, GRID_RENDERER_COUNT> coords = this->makeCoords();
+    std::array<simd_float2, GRID_RENDERER_COUNT> indices = this->makeIndices();
+    
+    id<MTLBuffer> coordsBuffer = [device newBufferWithBytes:<#(nonnull const void *)#> length:<#(NSUInteger)#> options:<#(MTLResourceOptions)#>]
     
     this->pipelineState = pipelineState;
+    this->coords = this->makeCoords();
+    this->indices = this->makeIndices();
 }
 
 void GridRenderer::renderWithEncoder(id<MTLRenderCommandEncoder> encoder, CGSize size) {
     BaseRenderer::renderWithEncoder(encoder, size);
-    this->coords();
+    
+    [encoder setRenderPipelineState:this->pipelineState];
+    
+    [encoder setVertexBuffer:self.coordsBuffer offset:0 atIndex:0];
+    
+    for (NSUInteger i = 0; i < (GRID_BLOCK_COUNT - 1) * 2; i++) {
+        @autoreleasepool {
+            [renderEncoder drawIndexedPrimitives:MTLPrimitiveTypeLine
+                                      indexCount:2
+                                       indexType:MTLIndexTypeUInt16
+                                     indexBuffer:self.indicesBuffer
+                               indexBufferOffset:sizeof(ushort) * i * 2];
+        }
+    }
+    
+    //
+    
+    [renderEncoder endEncoding];
+    id<CAMetalDrawable> drawable = [view currentDrawable];
+    [commandBuffer presentDrawable:drawable];
+    [commandBuffer commit];
 }
 
-std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::coords() {
+std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
     std::array<simd_float2, GRID_RENDERER_COUNT> results {};
     
-    for (short i = 0; i < (GRID_RENDERER_COUNT - 1) * 2; i = i + 2) {
+    for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i = i + 2) {
         float coord = -1.f + static_cast<float>(i + 2);
         
-        results[i] = simd_make_float2(-1.f, coord);
+        results.at(i) = simd_make_float2(-1.f, coord);
+        results.at(i + 1) = simd_make_float2(1.f, coord);
+        results.at(i + GRID_RENDERER_COUNT / 2) = simd_make_float2(coord, -1.f);
+        results.at(i + GRID_RENDERER_COUNT / 2 + 1) = simd_make_float2(coord, 1.f);
+    }
+    
+    return results;
+}
+
+std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeIndices() {
+    std::array<simd_float2, GRID_RENDERER_COUNT> results {};
+    
+    for (ushort i = 0; i < GRID_RENDERER_COUNT; i++) {
+        results.at(i) = i;
     }
     
     return results;

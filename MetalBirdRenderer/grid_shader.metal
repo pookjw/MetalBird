@@ -5,7 +5,7 @@
 //  Created by Jinwoo Kim on 4/17/23.
 //
 
-#include <metal_stdlib>
+#import <metal_stdlib>
 #import <MetalBirdRenderer/grid_common.hpp>
 using namespace metal;
 
