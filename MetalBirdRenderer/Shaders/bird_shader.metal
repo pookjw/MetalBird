@@ -24,7 +24,7 @@ namespace bird {
                                   )
     {
         return {
-            .position = float4(-0.5f, sin(timer), 0.f, 1.f),
+            .position = float4(-0.5f, (-2.f) * pow(timer, 2) + 1.f, 0.f, 1.f),
             .pointSize = 30
         };
     }

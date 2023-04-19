@@ -46,9 +46,20 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
     
     [renderEncoder setRenderPipelineState:this->pipelineState];
     
-    if (this->readyToJump.load()) {
-        this->timer += 0.5;
-        this->readyToJump.store(false);
+//    if (this->readyToJump.load()) {
+//        this->timer += 0.5;
+//        this->readyToJump.store(false);
+//    }
+    if (this->increasing) {
+        this->timer += 0.007f;
+        if (this->timer >= 0.7f) {
+            this->increasing = false;
+        }
+    } else {
+        this->timer -= 0.007f;
+        if (this->timer <= -0.7f) {
+            this->increasing = true;
+        }
     }
     
     id<MTLBuffer> timerBuffer = [this->device newBufferWithBytes:&this->timer length:sizeof(std::float_t) options:0];
@@ -61,5 +72,5 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
 }
 
 void BirdRenderer::jump() {
-    this->readyToJump.store(true);
+//    this->readyToJump.store(true);
 }

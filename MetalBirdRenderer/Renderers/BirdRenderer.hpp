@@ -26,6 +26,7 @@ public:
 private:
     id<MTLRenderPipelineState> pipelineState;
     std::atomic<bool> readyToJump;
+    bool increasing;
     std::float_t timer;
 };
 
