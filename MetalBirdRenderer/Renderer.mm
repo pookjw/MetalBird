@@ -8,7 +8,10 @@
 #import <MetalBirdRenderer/Renderer.h>
 #import <MetalBirdRenderer/constants.h>
 #import <MetalBirdRenderer/GridRenderer.hpp>
+#import <MetalBirdRenderer/BirdRenderer.hpp>
 #import <memory>
+#import <vector>
+#import <algorithm>
 
 /*
  TODO:
@@ -23,7 +26,7 @@
 @property (strong) id<MTLCommandQueue> commandQueue;
 @property (strong) id<MTLLibrary> library;
 
-@property (assign) std::shared_ptr<GridRenderer> gridRenderer;
+@property (assign) std::shared_ptr<std::vector<std::shared_ptr<BaseRenderer>>> renderers;
 @end
 
 @implementation Renderer
@@ -68,7 +71,10 @@
         
         //
         
-        self.gridRenderer = std::shared_ptr<GridRenderer>(new GridRenderer(mtkView, device, library, &error));
+        self.renderers = std::shared_ptr<std::vector<std::shared_ptr<BaseRenderer>>>(new std::vector<std::shared_ptr<BaseRenderer>> {
+            std::shared_ptr<GridRenderer>(new GridRenderer(mtkView, device, library, &error)),
+            std::shared_ptr<BirdRenderer>(new BirdRenderer(mtkView, device, library, &error))
+        });
         if (error) {
             completionHandler(error);
             return;
@@ -93,7 +99,9 @@
         
         //
         
-        self->_gridRenderer.get()->renderWithEncoder(renderEncoder, size);
+        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&renderEncoder, &size](std::shared_ptr<BaseRenderer> ptr) {
+            ptr.get()->renderWithEncoder(renderEncoder, size);
+        });
         
         //
         

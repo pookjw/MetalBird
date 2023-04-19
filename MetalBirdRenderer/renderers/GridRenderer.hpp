@@ -6,7 +6,6 @@
 //
 
 #import <MetalBirdRenderer/BaseRenderer.hpp>
-#import <memory>
 #import <array>
 
 #define GRID_RENDERER_LENGTH 10
@@ -15,6 +14,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 class GridRenderer : public BaseRenderer {
+    using BaseRenderer;
 public:
     GridRenderer(
                  MTKView *mtkView,

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F1B92EC29EF8A18000A8974 /* BirdRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F1B92EA29EF8A18000A8974 /* BirdRenderer.mm */; };
+		4F1B92ED29EF8A18000A8974 /* BirdRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4F1B92EB29EF8A18000A8974 /* BirdRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		4F99489C29EC39F300A7B116 /* MetalBirdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */; };
 		4F99489E29EC39F300A7B116 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489D29EC39F300A7B116 /* ContentView.swift */; };
 		4F9948A029EC39F400A7B116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F99489F29EC39F400A7B116 /* Assets.xcassets */; };
@@ -53,6 +55,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F1B92EA29EF8A18000A8974 /* BirdRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BirdRenderer.mm; sourceTree = "<group>"; };
+		4F1B92EB29EF8A18000A8974 /* BirdRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BirdRenderer.hpp; sourceTree = "<group>"; };
 		4F99489829EC39F300A7B116 /* MetalBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalBirdApp.swift; sourceTree = "<group>"; };
 		4F99489D29EC39F300A7B116 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 				4FAEC7B429ED9ACD005B696C /* BaseRenderer.mm */,
 				4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */,
 				4FAEC7B829ED9C75005B696C /* GridRenderer.mm */,
+				4F1B92EB29EF8A18000A8974 /* BirdRenderer.hpp */,
+				4F1B92EA29EF8A18000A8974 /* BirdRenderer.mm */,
 			);
 			path = renderers;
 			sourceTree = "<group>";
@@ -181,6 +187,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1B92ED29EF8A18000A8974 /* BirdRenderer.hpp in Headers */,
 				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
 				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
 				4FAEC7A629ED8D5D005B696C /* Renderer.h in Headers */,
@@ -307,6 +314,7 @@
 				4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */,
 				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,
 				4FAEC7B629ED9ACD005B696C /* BaseRenderer.mm in Sources */,
+				4F1B92EC29EF8A18000A8974 /* BirdRenderer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
