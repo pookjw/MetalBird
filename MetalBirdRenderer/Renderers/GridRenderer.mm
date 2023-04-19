@@ -53,18 +53,14 @@ GridRenderer::GridRenderer(
     this->indicesBuffer = indicesBuffer;
 }
 
-void GridRenderer::mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size) {
-    BaseRenderer::mtkView_drawableSizeWillChange(mtkView, size);
-    
-    id<MTLCommandBuffer> commandBuffer = this->commandQueue.commandBuffer;
-    MTLRenderPassDescriptor *descriptor = mtkView.currentRenderPassDescriptor;
-    id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
+void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<struct CGSize> size) {
+    BaseRenderer::drawInRenderEncoder(renderEncoder, size);
     
     [renderEncoder setRenderPipelineState:this->pipelineState];
     
     [renderEncoder setVertexBuffer:this->coordsBuffer offset:0 atIndex:0];
     
-    for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i++) {
+    for (std::int16_t i = 0; std::cmp_less(i, GRID_RENDERER_COUNT / 2); i++) {
         @autoreleasepool {
             [renderEncoder drawIndexedPrimitives:MTLPrimitiveTypeLine
                                 indexCount:2
@@ -73,24 +69,15 @@ void GridRenderer::mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSiz
                          indexBufferOffset:sizeof(std::tuple_element<0, decltype(this->indices)>::type) * i * 2];
         }
     }
-    
-    [renderEncoder endEncoding];
-    id<CAMetalDrawable> drawable = mtkView.currentDrawable;
-    [commandBuffer presentDrawable:drawable];
-    [commandBuffer commit];
-}
-
-void GridRenderer::drawInMTKView(MTKView *mtkView) {
-    BaseRenderer::drawInMTKView(mtkView);
 }
 
 std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
     std::array<simd_float2, GRID_RENDERER_COUNT> results {};
     
-    float unit = 1.f / GRID_RENDERER_LENGTH;
+    std::float_t unit = 1.f / GRID_RENDERER_LENGTH;
     
-    for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i = i + 2) {
-        float coord = -1.f + unit * static_cast<float>(i + 2);
+    for (std::int16_t i = 0; std::cmp_less(i, GRID_RENDERER_COUNT / 2); i = i + 2) {
+        std::float_t coord = -1.f + unit * static_cast<std::float_t>(i + 2);
         
         results.at(i) = simd_make_float2(-1.f, coord);
         results.at(i + 1) = simd_make_float2(1.f, coord);
@@ -101,10 +88,10 @@ std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
     return results;
 }
 
-std::array<ushort, GRID_RENDERER_COUNT> GridRenderer::makeIndices() {
-    std::array<ushort, GRID_RENDERER_COUNT> results {};
+std::array<std::uint16_t, GRID_RENDERER_COUNT> GridRenderer::makeIndices() {
+    std::array<std::uint16_t, GRID_RENDERER_COUNT> results {};
     
-    for (ushort i = 0; i < GRID_RENDERER_COUNT; i++) {
+    for (std::uint16_t i = 0; std::cmp_less(i, GRID_RENDERER_COUNT); i++) {
         results.at(i) = i;
     }
     

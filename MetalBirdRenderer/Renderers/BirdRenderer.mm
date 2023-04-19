@@ -41,12 +41,25 @@ BirdRenderer::BirdRenderer(
     this->pipelineState = pipelineState;
 }
 
-void BirdRenderer::mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size) {
-    BaseRenderer::mtkView_drawableSizeWillChange(mtkView, size);
+void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<struct CGSize> size) {
+    BaseRenderer::drawInRenderEncoder(renderEncoder, size);
+    
+    [renderEncoder setRenderPipelineState:this->pipelineState];
+    
+    if (this->readyToJump.load()) {
+        this->timer += 0.5;
+        this->readyToJump.store(false);
+    }
+    
+    id<MTLBuffer> timerBuffer = [this->device newBufferWithBytes:&this->timer length:sizeof(std::float_t) options:0];
+    
+    [renderEncoder setVertexBuffer:timerBuffer offset:0 atIndex:0];
+    
+    [renderEncoder drawPrimitives:MTLPrimitiveTypePoint
+                      vertexStart:0
+                      vertexCount:1];
 }
 
-void BirdRenderer::drawInMTKView(MTKView *mtkView) {
-    BaseRenderer::drawInMTKView(mtkView);
-    
-    
+void BirdRenderer::jump() {
+    this->readyToJump.store(true);
 }

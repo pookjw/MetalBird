@@ -26,12 +26,17 @@ struct GameView: UIViewRepresentable {
     
     actor Coordinator {
         fileprivate let mtkView: DynamicMTKView
-        private let renderer: Renderer
+        private let renderer: GameRenderer
         private let setupTask: Task<Void, Never>
         
         init(mtkView: DynamicMTKView) {
-            let renderer: Renderer = .init()
+            let renderer: GameRenderer = .init()
             let setupTask: Task<Void, Never> = .init {
+                await MainActor.run {
+                    let gesture: UITapGestureRecognizer = .init(target: renderer, action: #selector(GameRenderer.jumpBird(_:)))
+                    mtkView.addGestureRecognizer(gesture)
+                }
+                
                 try! await renderer.setup(mtkView: mtkView)
             }
             

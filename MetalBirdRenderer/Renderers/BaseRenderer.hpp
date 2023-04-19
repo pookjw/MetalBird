@@ -6,6 +6,7 @@
 //
 
 #import <MetalKit/MetalKit.h>
+#import <optional>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -18,13 +19,11 @@ public:
                  NSError * _Nullable __autoreleasing * error
                  );
     
-    virtual void mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size);
-    virtual void drawInMTKView(MTKView *mtkView);
+    virtual void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<CGSize> size);
 protected:
     MTKView *mtkView;
     id<MTLDevice> device;
     id<MTLLibrary> library;
-    id<MTLCommandQueue> commandQueue;
 };
 
 NS_HEADER_AUDIT_END(nullability, sendability)

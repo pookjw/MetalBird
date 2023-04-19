@@ -1,34 +1,37 @@
 //
-//  Renderer.mm
+//  GameRenderer.mm
 //  MetalBirdRenderer
 //
 //  Created by Jinwoo Kim on 4/16/23.
 //
 
-#import <MetalBirdRenderer/Renderer.h>
+#import <MetalBirdRenderer/GameRenderer.h>
 #import <MetalBirdRenderer/constants.h>
 #import <MetalBirdRenderer/GridRenderer.hpp>
 #import <MetalBirdRenderer/BirdRenderer.hpp>
 #import <memory>
 #import <vector>
 #import <algorithm>
+#import <float.h>
 
 /*
  TODO:
  - MTLBinaryArchive + MTLFunctionDescriptor
  */
 
-@interface Renderer () <MTKViewDelegate>
+@interface GameRenderer () <MTKViewDelegate>
 @property (strong) NSOperationQueue *queue;
 
 @property (strong, nullable) MTKView *mtkView;
 @property (strong) id<MTLDevice> device;
+@property (strong) id<MTLCommandQueue> commandQueue;
 @property (strong) id<MTLLibrary> library;
 
 @property (assign) std::shared_ptr<std::vector<std::shared_ptr<BaseRenderer>>> renderers;
+@property (assign) std::float_t timer;
 @end
 
-@implementation Renderer
+@implementation GameRenderer
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -48,6 +51,7 @@
         NSError * _Nullable __autoreleasing error = nil;
         
         id<MTLDevice> device = MTLCreateSystemDefaultDevice();
+        id<MTLCommandQueue> commandQueue = device.newCommandQueue;
         
         NSBundle *bundle = [NSBundle bundleWithIdentifier:MetalBirdRendererBundleIdentifier];
         id<MTLLibrary> library = [device newDefaultLibraryWithBundle:bundle error:&error];
@@ -64,6 +68,7 @@
         
         self.mtkView = mtkView;
         self.device = device;
+        self.commandQueue = commandQueue;
         self.library = library;
         
         //
@@ -81,6 +86,18 @@
     }];
 }
 
+- (void)jumpBird:(id _Nullable)sender {
+    [self.queue addOperationWithBlock:^{
+        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [](std::shared_ptr<BaseRenderer> ptr) {
+            BaseRenderer *baseRenderer = ptr.get();
+            BirdRenderer *birdRenderer = dynamic_cast<BirdRenderer *>(baseRenderer);
+            if (birdRenderer == nullptr) return;
+            
+            birdRenderer->jump();
+        });
+    }];
+}
+
 - (void)setupQueue {
     NSOperationQueue *queue = [NSOperationQueue new];
     queue.qualityOfService = NSQualityOfServiceUserInteractive;
@@ -88,20 +105,31 @@
     self.queue = queue;
 }
 
-- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
+- (void)renderWithView:(MTKView *)mtkView size:(std::optional<CGSize>)size {
     [self.queue addOperationWithBlock:^{
-        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&view, &size](std::shared_ptr<BaseRenderer> ptr) {
-            ptr.get()->mtkView_drawableSizeWillChange(view, size);
+        id<MTLCommandBuffer> commandBuffer = self->_commandQueue.commandBuffer;
+        MTLRenderPassDescriptor *descriptor = mtkView.currentRenderPassDescriptor;
+        id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
+        
+        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&renderEncoder, &size](std::shared_ptr<BaseRenderer> ptr) {
+            @autoreleasepool {
+                ptr.get()->drawInRenderEncoder(renderEncoder, size);
+            }
         });
+        
+        [renderEncoder endEncoding];
+        id<CAMetalDrawable> drawable = mtkView.currentDrawable;
+        [commandBuffer presentDrawable:drawable];
+        [commandBuffer commit];
     }];
 }
 
+- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
+    [self renderWithView:view size:std::optional<CGSize>(size)];
+}
+
 - (void)drawInMTKView:(nonnull MTKView *)view { 
-    [self.queue addOperationWithBlock:^{
-        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&view](std::shared_ptr<BaseRenderer> ptr) {
-            ptr.get()->drawInMTKView(view);
-        });
-    }];
+    [self renderWithView:view size:std::nullopt];
 }
 
 @end

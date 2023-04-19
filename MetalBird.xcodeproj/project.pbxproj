@@ -18,8 +18,8 @@
 		4FAEC79D29ED8D3A005B696C /* MetalBirdRenderer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */; };
 		4FAEC79E29ED8D3A005B696C /* MetalBirdRenderer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4FAEC7A529ED8D5D005B696C /* constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7A229ED8D5D005B696C /* constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FAEC7A629ED8D5D005B696C /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7A329ED8D5D005B696C /* Renderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FAEC7A729ED8D5D005B696C /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7A429ED8D5D005B696C /* Renderer.mm */; };
+		4FAEC7A629ED8D5D005B696C /* GameRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7A329ED8D5D005B696C /* GameRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FAEC7A729ED8D5D005B696C /* GameRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7A429ED8D5D005B696C /* GameRenderer.mm */; };
 		4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7A829ED8D89005B696C /* bird_shader.metal */; };
 		4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7AA29ED8D91005B696C /* grid_shader.metal */; };
 		4FAEC7B029ED950E005B696C /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7AF29ED950E005B696C /* Metal.framework */; };
@@ -72,8 +72,8 @@
 		4FAEC79729ED8D3A005B696C /* MetalBirdRenderer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetalBirdRenderer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FAEC79929ED8D3A005B696C /* MetalBirdRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalBirdRenderer.h; sourceTree = "<group>"; };
 		4FAEC7A229ED8D5D005B696C /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
-		4FAEC7A329ED8D5D005B696C /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
-		4FAEC7A429ED8D5D005B696C /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		4FAEC7A329ED8D5D005B696C /* GameRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRenderer.h; sourceTree = "<group>"; };
+		4FAEC7A429ED8D5D005B696C /* GameRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameRenderer.mm; sourceTree = "<group>"; };
 		4FAEC7A829ED8D89005B696C /* bird_shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = bird_shader.metal; sourceTree = "<group>"; };
 		4FAEC7AA29ED8D91005B696C /* grid_shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = grid_shader.metal; sourceTree = "<group>"; };
 		4FAEC7AC29ED94F3005B696C /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -172,8 +172,8 @@
 			children = (
 				4FAEC79929ED8D3A005B696C /* MetalBirdRenderer.h */,
 				4FAEC7A229ED8D5D005B696C /* constants.h */,
-				4FAEC7A329ED8D5D005B696C /* Renderer.h */,
-				4FAEC7A429ED8D5D005B696C /* Renderer.mm */,
+				4FAEC7A329ED8D5D005B696C /* GameRenderer.h */,
+				4FAEC7A429ED8D5D005B696C /* GameRenderer.mm */,
 				4FB90AF329F03D7500EE37A4 /* DynamicMTKView.h */,
 				4FB90AF429F03D7500EE37A4 /* DynamicMTKView.mm */,
 				4FB90AE729F03C2600EE37A4 /* Categories */,
@@ -226,7 +226,7 @@
 				4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */,
 				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
 				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
-				4FAEC7A629ED8D5D005B696C /* Renderer.h in Headers */,
+				4FAEC7A629ED8D5D005B696C /* GameRenderer.h in Headers */,
 				4FAEC79A29ED8D3A005B696C /* MetalBirdRenderer.h in Headers */,
 				4FAEC7B729ED9ACD005B696C /* BaseRenderer.hpp in Headers */,
 			);
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FAEC7A729ED8D5D005B696C /* Renderer.mm in Sources */,
+				4FAEC7A729ED8D5D005B696C /* GameRenderer.mm in Sources */,
 				4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */,
 				4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */,
 				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,

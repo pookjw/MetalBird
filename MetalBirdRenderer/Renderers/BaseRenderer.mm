@@ -17,13 +17,8 @@ BaseRenderer::BaseRenderer(
     this->mtkView = mtkView;
     this->device = device;
     this->library = library;
-    this->commandQueue = device.newCommandQueue;
 }
 
-void BaseRenderer::mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size) {
-    
-}
-
-void BaseRenderer::drawInMTKView(MTKView *mtkView) {
+void BaseRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<CGSize> size) {
     
 }

@@ -23,17 +23,17 @@ public:
                  id<MTLLibrary> library,
                  NSError * _Nullable __autoreleasing * error
                  );
-    void mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size);
-    void drawInMTKView(MTKView *mtkView);
+    
+    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<CGSize> size);
 private:
     id<MTLRenderPipelineState> pipelineState;
     std::array<simd_float2, GRID_RENDERER_COUNT> coords;
-    std::array<ushort, GRID_RENDERER_COUNT> indices;
+    std::array<std::uint16_t, GRID_RENDERER_COUNT> indices;
     id<MTLBuffer> coordsBuffer;
     id<MTLBuffer> indicesBuffer;
     
     std::array<simd_float2, GRID_RENDERER_COUNT> makeCoords();
-    std::array<ushort, GRID_RENDERER_COUNT> makeIndices();
+    std::array<std::uint16_t, GRID_RENDERER_COUNT> makeIndices();
 };
 
 NS_HEADER_AUDIT_END(nullability, sendability)

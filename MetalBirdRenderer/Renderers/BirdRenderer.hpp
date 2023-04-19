@@ -21,11 +21,12 @@ public:
                  NSError * _Nullable __autoreleasing * error 
                  );
     
-    void mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size);
-    void drawInMTKView(MTKView *mtkView);
+    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<CGSize> size);
+    void jump();
 private:
     id<MTLRenderPipelineState> pipelineState;
-    float timer;
+    std::atomic<bool> readyToJump;
+    std::float_t timer;
 };
 
 NS_HEADER_AUDIT_END(nullability, sendability)
