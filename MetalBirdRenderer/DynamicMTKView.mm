@@ -6,13 +6,13 @@
 //
 
 #import <MetalBirdRenderer/DynamicMTKView.h>
-#import <MetalBirdRenderer/UIWindowScene+UIWindowDidChangeScreenNotification.hpp>
+#import <MetalBirdRenderer/UIWindowScene+DidChangeScreenNotification.hpp>
 #import <objc/message.h>
 
 @implementation DynamicMTKView
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
-    [NSNotificationCenter.defaultCenter removeObserver:self name:__UIWindowDidChangeScreenNotification object:self.window.windowScene];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:__UIWindowSceneDidChangeScreenNotification object:self.window.windowScene];
     [super willMoveToWindow:newWindow];
 }
 
@@ -22,7 +22,7 @@
     if (self.window.windowScene) {
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(didChangeScreen:)
-                                                   name:__UIWindowDidChangeScreenNotification
+                                                   name:__UIWindowSceneDidChangeScreenNotification
                                                  object:self.window.windowScene];
     }
 }

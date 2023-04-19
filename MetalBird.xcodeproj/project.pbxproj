@@ -28,8 +28,8 @@
 		4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEC7B829ED9C75005B696C /* GridRenderer.mm */; };
 		4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		4FAEC7BF29EDA2E7005B696C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */; };
-		4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FB90AE829F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
-		4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FB90AE929F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm */; };
+		4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FB90AE829F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FB90AE929F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm */; };
 		4FB90AEC29F03C7F00EE37A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BC29EDA2DE005B696C /* UIKit.framework */; };
 		4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FB90AF329F03D7500EE37A4 /* DynamicMTKView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FB90AF629F03D7500EE37A4 /* DynamicMTKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FB90AF429F03D7500EE37A4 /* DynamicMTKView.mm */; };
@@ -85,8 +85,8 @@
 		4FAEC7B929ED9C75005B696C /* GridRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GridRenderer.hpp; sourceTree = "<group>"; };
 		4FAEC7BC29EDA2DE005B696C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		4FB90AE829F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "UIWindowScene+UIWindowDidChangeScreenNotification.hpp"; sourceTree = "<group>"; };
-		4FB90AE929F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIWindowScene+UIWindowDidChangeScreenNotification.mm"; sourceTree = "<group>"; };
+		4FB90AE829F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "UIWindowScene+DidChangeScreenNotification.hpp"; sourceTree = "<group>"; };
+		4FB90AE929F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIWindowScene+DidChangeScreenNotification.mm"; sourceTree = "<group>"; };
 		4FB90AF329F03D7500EE37A4 /* DynamicMTKView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicMTKView.h; sourceTree = "<group>"; };
 		4FB90AF429F03D7500EE37A4 /* DynamicMTKView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DynamicMTKView.mm; sourceTree = "<group>"; };
 		4FB90AF829F03DC600EE37A4 /* MetalBird.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetalBird.entitlements; sourceTree = "<group>"; };
@@ -208,8 +208,8 @@
 		4FB90AE729F03C2600EE37A4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				4FB90AE829F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp */,
-				4FB90AE929F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm */,
+				4FB90AE829F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp */,
+				4FB90AE929F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.hpp in Headers */,
+				4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp in Headers */,
 				4F1B92ED29EF8A18000A8974 /* BirdRenderer.hpp in Headers */,
 				4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */,
 				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
@@ -350,7 +350,7 @@
 				4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */,
 				4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */,
 				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,
-				4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+UIWindowDidChangeScreenNotification.mm in Sources */,
+				4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm in Sources */,
 				4FAEC7B629ED9ACD005B696C /* BaseRenderer.mm in Sources */,
 				4F1B92EC29EF8A18000A8974 /* BirdRenderer.mm in Sources */,
 				4FB90AF629F03D7500EE37A4 /* DynamicMTKView.mm in Sources */,
