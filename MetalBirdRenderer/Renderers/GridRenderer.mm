@@ -6,6 +6,15 @@
 //
 
 #import <MetalBirdRenderer/GridRenderer.hpp>
+#import <cmath>
+
+constinit const std::int16_t GridRenderer::length = GRID_RENDERER_LENGTH;
+
+constexpr const std::int16_t GridRenderer::count() {
+    // Not implemented in clang yet.
+//    return std::fmal(GridRenderer::length, 4, -4);
+    return GRID_RENDERER_COUNT;
+}
 
 GridRenderer::GridRenderer(
                            MTKView *mtkView,
@@ -25,8 +34,8 @@ GridRenderer::GridRenderer(
     id<MTLFunction> fragmentFunction = [library newFunctionWithDescriptor:fragmentFunctionDescriptor error:error];
     if (*error) return;
     
-    std::array<simd_float2, GRID_RENDERER_COUNT> coords = this->makeCoords();
-    std::array<ushort, GRID_RENDERER_COUNT> indices = this->makeIndices();
+    std::array<simd_float2, GridRenderer::count()> coords = this->makeCoords();
+    std::array<ushort, GridRenderer::count()> indices = this->makeIndices();
     
     MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
     pipelineDescriptor.vertexFunction = vertexFunction;
@@ -64,7 +73,7 @@ void GridRenderer::mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSiz
     
     [renderEncoder setVertexBuffer:this->coordsBuffer offset:0 atIndex:0];
     
-    for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i++) {
+    for (ushort i = 0; i < GridRenderer::count() / 2; i++) {
         @autoreleasepool {
             [renderEncoder drawIndexedPrimitives:MTLPrimitiveTypeLine
                                 indexCount:2
@@ -85,26 +94,27 @@ void GridRenderer::drawInMTKView(MTKView *mtkView) {
 }
 
 std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
-    std::array<simd_float2, GRID_RENDERER_COUNT> results {};
+    std::array<simd_float2, GridRenderer::count()> results {};
     
-    float unit = 1.f / GRID_RENDERER_LENGTH;
+    float unit = 1.f / GridRenderer::length;
     
-    for (ushort i = 0; i < GRID_RENDERER_COUNT / 2; i = i + 2) {
+    // TODO: std cmath
+    for (ushort i = 0; i < GridRenderer::count() / 2; i = i + 2) {
         float coord = -1.f + unit * static_cast<float>(i + 2);
         
         results.at(i) = simd_make_float2(-1.f, coord);
         results.at(i + 1) = simd_make_float2(1.f, coord);
-        results.at(i + GRID_RENDERER_COUNT / 2) = simd_make_float2(coord, -1.f);
-        results.at(i + GRID_RENDERER_COUNT / 2 + 1) = simd_make_float2(coord, 1.f);
+        results.at(i + GridRenderer::count() / 2) = simd_make_float2(coord, -1.f);
+        results.at(i + GridRenderer::count() / 2 + 1) = simd_make_float2(coord, 1.f);
     }
     
     return results;
 }
 
 std::array<ushort, GRID_RENDERER_COUNT> GridRenderer::makeIndices() {
-    std::array<ushort, GRID_RENDERER_COUNT> results {};
+    std::array<ushort, GridRenderer::count()> results {};
     
-    for (ushort i = 0; i < GRID_RENDERER_COUNT; i++) {
+    for (ushort i = 0; i < GridRenderer::count(); i++) {
         results.at(i) = i;
     }
     

@@ -26,6 +26,9 @@ public:
     void mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size);
     void drawInMTKView(MTKView *mtkView);
 private:
+    static constinit const std::int16_t length;
+    static constexpr const std::int16_t count();
+    
     id<MTLRenderPipelineState> pipelineState;
     std::array<simd_float2, GRID_RENDERER_COUNT> coords;
     std::array<ushort, GRID_RENDERER_COUNT> indices;

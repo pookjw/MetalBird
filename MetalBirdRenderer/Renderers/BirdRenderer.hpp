@@ -24,6 +24,7 @@ public:
     void mtkView_drawableSizeWillChange(MTKView *mtkView, struct CGSize size);
     void drawInMTKView(MTKView *mtkView);
 private:
+    static constinit const std::float_t angle;
     id<MTLRenderPipelineState> pipelineState;
     float timer;
 };

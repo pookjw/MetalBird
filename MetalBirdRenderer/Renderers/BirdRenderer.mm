@@ -7,6 +7,8 @@
 
 #import <MetalBirdRenderer/BirdRenderer.hpp>
 
+constinit const std::float_t BirdRenderer::angle (0.f);
+
 BirdRenderer::BirdRenderer(
                            MTKView *mtkView,
                            id<MTLDevice> device,
