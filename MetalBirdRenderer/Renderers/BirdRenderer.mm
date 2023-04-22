@@ -82,7 +82,7 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
     bird::data data = {
         .drawable_size = simd_make_float2(size.width, size.height),
         .relative_point_size = 0.05f,
-        .relative_x = -0.7f,
+        .relative_x = 0.f,
         .relative_y = y
     };
     
