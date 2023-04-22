@@ -19,6 +19,6 @@ BaseRenderer::BaseRenderer(
     this->library = library;
 }
 
-void BaseRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<CGSize> size) {
+void BaseRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size) {
     
 }

@@ -24,7 +24,7 @@ public:
                  NSError * _Nullable __autoreleasing * error
                  );
     
-    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<CGSize> size);
+    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size);
 private:
     static constinit const std::int16_t length;
     static constexpr const std::int16_t count();

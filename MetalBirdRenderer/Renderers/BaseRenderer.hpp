@@ -6,7 +6,6 @@
 //
 
 #import <MetalKit/MetalKit.h>
-#import <optional>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -19,7 +18,7 @@ public:
                  NSError * _Nullable __autoreleasing * error
                  );
     
-    virtual void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<CGSize> size);
+    virtual void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size);
 protected:
     MTKView *mtkView;
     id<MTLDevice> device;

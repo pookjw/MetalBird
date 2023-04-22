@@ -86,7 +86,7 @@ private final class MouseDownGestureRecognizer: NSGestureRecognizer {
             let action: Selector,
             target.responds(to: action)
         {
-            let _:Unmanaged<AnyObject>? = target.perform(action, with: self)
+            let _: Unmanaged<AnyObject>? = target.perform(action, with: self)
         }
     }
 }

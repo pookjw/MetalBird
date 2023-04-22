@@ -6,26 +6,23 @@
 //
 
 #include <metal_stdlib>
+#import <MetalBirdRenderer/bird_common.hpp>
 using namespace metal;
 
 namespace bird {
-    struct vertex_in {
-        
-    };
-    
     struct vertex_out {
         float4 position [[position]];
         float pointSize [[point_size]];
     };
     
     vertex vertex_out vertex_main(
-                                  constant float &timer [[buffer(0)]],
+                                  constant bird::data &data [[buffer(0)]],
                                   uint vertexID [[vertex_id]]
                                   )
     {
         return {
-            .position = float4(-0.5f, (-2.f) * pow(timer, 2) + 1.f, 0.f, 1.f),
-            .pointSize = 30
+            .position = float4(data.relative_x, data.relative_y, 0.f, 1.f),
+            .pointSize = data.drawable_size.x * data.relative_point_size
         };
     }
     

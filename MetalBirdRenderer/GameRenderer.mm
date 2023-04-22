@@ -12,7 +12,7 @@
 #import <memory>
 #import <vector>
 #import <algorithm>
-#import <float.h>
+#import <optional>
 
 /*
  TODO:
@@ -108,17 +108,19 @@
 - (void)renderWithView:(MTKView *)mtkView size:(std::optional<CGSize>)size {
     [self.queue addOperationWithBlock:^{
         id<MTLCommandBuffer> commandBuffer = self->_commandQueue.commandBuffer;
-        MTLRenderPassDescriptor *descriptor = mtkView.currentRenderPassDescriptor;
+        MTLRenderPassDescriptor * _Nullable descriptor = mtkView.currentRenderPassDescriptor;
+        if (descriptor == nil) return;
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
+        id<CAMetalDrawable> drawable = mtkView.currentDrawable;
+        CGSize drawableSize = size.value_or([drawable layer].drawableSize);
         
-        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&renderEncoder, &size](std::shared_ptr<BaseRenderer> ptr) {
+        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&renderEncoder, &drawableSize](std::shared_ptr<BaseRenderer> ptr) {
             @autoreleasepool {
-                ptr.get()->drawInRenderEncoder(renderEncoder, size);
+                ptr.get()->drawInRenderEncoder(renderEncoder, drawableSize);
             }
         });
         
         [renderEncoder endEncoding];
-        id<CAMetalDrawable> drawable = mtkView.currentDrawable;
         [commandBuffer presentDrawable:drawable];
         [commandBuffer commit];
     }];

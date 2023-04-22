@@ -62,7 +62,7 @@ GridRenderer::GridRenderer(
     this->indicesBuffer = indicesBuffer;
 }
 
-void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, std::optional<struct CGSize> size) {
+void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size) {
     BaseRenderer::drawInRenderEncoder(renderEncoder, size);
     
     [renderEncoder setRenderPipelineState:this->pipelineState];
