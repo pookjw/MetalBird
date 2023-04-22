@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4F1B92EC29EF8A18000A8974 /* BirdRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F1B92EA29EF8A18000A8974 /* BirdRenderer.mm */; };
 		4F1B92ED29EF8A18000A8974 /* BirdRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4F1B92EB29EF8A18000A8974 /* BirdRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4F4B8DC329F404BF00AD6F08 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4B8DC229F404BE00AD6F08 /* AppKit.framework */; platformFilters = (maccatalyst, macos, ); };
+		4F4B8DC629F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4B8DC429F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h */; };
+		4F4B8DC729F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DC529F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm */; };
 		4F99489C29EC39F300A7B116 /* MetalBirdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */; };
 		4F99489E29EC39F300A7B116 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489D29EC39F300A7B116 /* ContentView.swift */; };
 		4F9948A029EC39F400A7B116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F99489F29EC39F400A7B116 /* Assets.xcassets */; };
@@ -30,7 +33,7 @@
 		4FAEC7BF29EDA2E7005B696C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */; };
 		4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FB90AE829F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FB90AE929F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm */; };
-		4FB90AEC29F03C7F00EE37A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BC29EDA2DE005B696C /* UIKit.framework */; };
+		4FB90AEC29F03C7F00EE37A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7BC29EDA2DE005B696C /* UIKit.framework */; platformFilters = (ios, maccatalyst, ); };
 		4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FB90AF329F03D7500EE37A4 /* DynamicMTKView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FB90AF629F03D7500EE37A4 /* DynamicMTKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FB90AF429F03D7500EE37A4 /* DynamicMTKView.mm */; };
 		4FB90AF729F03DAB00EE37A4 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAEC7AC29ED94F3005B696C /* MetalKit.framework */; };
@@ -63,6 +66,9 @@
 /* Begin PBXFileReference section */
 		4F1B92EA29EF8A18000A8974 /* BirdRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BirdRenderer.mm; sourceTree = "<group>"; };
 		4F1B92EB29EF8A18000A8974 /* BirdRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BirdRenderer.hpp; sourceTree = "<group>"; };
+		4F4B8DC229F404BE00AD6F08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
+		4F4B8DC429F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Foundation_IvarDescription.h"; sourceTree = "<group>"; };
+		4F4B8DC529F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject+Foundation_IvarDescription.mm"; sourceTree = "<group>"; };
 		4F99489829EC39F300A7B116 /* MetalBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalBirdApp.swift; sourceTree = "<group>"; };
 		4F99489D29EC39F300A7B116 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +113,7 @@
 			files = (
 				4FAEC7BF29EDA2E7005B696C /* CoreGraphics.framework in Frameworks */,
 				4FB90AF729F03DAB00EE37A4 /* MetalKit.framework in Frameworks */,
+				4F4B8DC329F404BF00AD6F08 /* AppKit.framework in Frameworks */,
 				4FB90AEC29F03C7F00EE37A4 /* UIKit.framework in Frameworks */,
 				4FAEC7B029ED950E005B696C /* Metal.framework in Frameworks */,
 			);
@@ -158,6 +165,7 @@
 		4F9948DA29EC482F00A7B116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F4B8DC229F404BE00AD6F08 /* AppKit.framework */,
 				4FAEC7BE29EDA2E7005B696C /* CoreGraphics.framework */,
 				4FAEC7BC29EDA2DE005B696C /* UIKit.framework */,
 				4FAEC7AF29ED950E005B696C /* Metal.framework */,
@@ -208,6 +216,8 @@
 		4FB90AE729F03C2600EE37A4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4F4B8DC429F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h */,
+				4F4B8DC529F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm */,
 				4FB90AE829F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp */,
 				4FB90AE929F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm */,
 			);
@@ -228,6 +238,7 @@
 				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
 				4FAEC7A629ED8D5D005B696C /* GameRenderer.h in Headers */,
 				4FAEC79A29ED8D3A005B696C /* MetalBirdRenderer.h in Headers */,
+				4F4B8DC629F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h in Headers */,
 				4FAEC7B729ED9ACD005B696C /* BaseRenderer.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FAEC7A729ED8D5D005B696C /* GameRenderer.mm in Sources */,
+				4F4B8DC729F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm in Sources */,
 				4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */,
 				4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */,
 				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,
@@ -508,7 +520,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -541,7 +553,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -578,6 +590,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBirdRenderer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -615,6 +630,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.MetalBirdRenderer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

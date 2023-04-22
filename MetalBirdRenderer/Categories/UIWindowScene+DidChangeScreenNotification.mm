@@ -8,6 +8,8 @@
 #import <MetalBirdRenderer/UIWindowScene+DidChangeScreenNotification.hpp>
 #import <objc/runtime.h>
 
+#if TARGET_OS_IPHONE
+
 namespace UIWindowScene_DidChangeScreenNotification {
 
 static void (*original_screenDidChangeFromScreen_toScreen)(id, SEL, id, id);
@@ -29,3 +31,5 @@ static void custom_screenDidChangeFromScreen_toScreen(id self, SEL _cmd, id x2, 
 }
 
 @end
+
+#endif

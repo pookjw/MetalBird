@@ -6,6 +6,7 @@
 //
 
 #import <MetalBirdRenderer/BirdRenderer.hpp>
+#import <iostream>
 
 constinit const std::float_t BirdRenderer::angle (0.f);
 
@@ -74,5 +75,6 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
 }
 
 void BirdRenderer::jump() {
+    std::printf("Clicked!");
 //    this->readyToJump.store(true);
 }
