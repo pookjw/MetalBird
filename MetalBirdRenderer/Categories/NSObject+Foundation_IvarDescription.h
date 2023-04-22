@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface NSObject (Foundation_IvarDescription)
 - (NSString *)_fd_shortMethodDescription;
@@ -20,4 +20,4 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)_fd__protocolDescriptionForProtocol:(Protocol *)arg1;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

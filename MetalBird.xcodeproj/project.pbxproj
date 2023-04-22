@@ -12,6 +12,10 @@
 		4F4B8DC329F404BF00AD6F08 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4B8DC229F404BE00AD6F08 /* AppKit.framework */; platformFilters = (maccatalyst, macos, ); };
 		4F4B8DC629F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4B8DC429F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h */; };
 		4F4B8DC729F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DC529F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm */; };
+		4F4B8DCF29F411EE00AD6F08 /* ProjectileMotion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DCD29F411EE00AD6F08 /* ProjectileMotion.cpp */; };
+		4F4B8DD029F411EE00AD6F08 /* ProjectileMotion.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4F4B8DCE29F411EE00AD6F08 /* ProjectileMotion.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4F4B8DD329F4161500AD6F08 /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DD129F4161500AD6F08 /* Math.cpp */; };
+		4F4B8DD429F4161500AD6F08 /* Math.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4F4B8DD229F4161500AD6F08 /* Math.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		4F99489C29EC39F300A7B116 /* MetalBirdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */; };
 		4F99489E29EC39F300A7B116 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489D29EC39F300A7B116 /* ContentView.swift */; };
 		4F9948A029EC39F400A7B116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F99489F29EC39F400A7B116 /* Assets.xcassets */; };
@@ -69,6 +73,10 @@
 		4F4B8DC229F404BE00AD6F08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		4F4B8DC429F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Foundation_IvarDescription.h"; sourceTree = "<group>"; };
 		4F4B8DC529F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject+Foundation_IvarDescription.mm"; sourceTree = "<group>"; };
+		4F4B8DCD29F411EE00AD6F08 /* ProjectileMotion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectileMotion.cpp; sourceTree = "<group>"; };
+		4F4B8DCE29F411EE00AD6F08 /* ProjectileMotion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectileMotion.hpp; sourceTree = "<group>"; };
+		4F4B8DD129F4161500AD6F08 /* Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
+		4F4B8DD229F4161500AD6F08 /* Math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Math.hpp; sourceTree = "<group>"; };
 		4F99489829EC39F300A7B116 /* MetalBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalBirdApp.swift; sourceTree = "<group>"; };
 		4F99489D29EC39F300A7B116 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +130,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F4B8DC829F4100D00AD6F08 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4F4B8DCE29F411EE00AD6F08 /* ProjectileMotion.hpp */,
+				4F4B8DCD29F411EE00AD6F08 /* ProjectileMotion.cpp */,
+				4F4B8DD229F4161500AD6F08 /* Math.hpp */,
+				4F4B8DD129F4161500AD6F08 /* Math.cpp */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		4F99488F29EC39F300A7B116 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +206,7 @@
 				4FB90AE729F03C2600EE37A4 /* Categories */,
 				4FAEC7B329ED9AB0005B696C /* Renderers */,
 				4FB90ABE29F026ED00EE37A4 /* Shaders */,
+				4F4B8DC829F4100D00AD6F08 /* Utils */,
 			);
 			path = MetalBirdRenderer;
 			sourceTree = "<group>";
@@ -236,9 +256,11 @@
 				4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */,
 				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
 				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
+				4F4B8DD029F411EE00AD6F08 /* ProjectileMotion.hpp in Headers */,
 				4FAEC7A629ED8D5D005B696C /* GameRenderer.h in Headers */,
 				4FAEC79A29ED8D3A005B696C /* MetalBirdRenderer.h in Headers */,
 				4F4B8DC629F4069500AD6F08 /* NSObject+Foundation_IvarDescription.h in Headers */,
+				4F4B8DD429F4161500AD6F08 /* Math.hpp in Headers */,
 				4FAEC7B729ED9ACD005B696C /* BaseRenderer.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4B8DCF29F411EE00AD6F08 /* ProjectileMotion.cpp in Sources */,
 				4FAEC7A729ED8D5D005B696C /* GameRenderer.mm in Sources */,
 				4F4B8DC729F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm in Sources */,
 				4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */,
@@ -364,6 +387,7 @@
 				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,
 				4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm in Sources */,
 				4FAEC7B629ED9ACD005B696C /* BaseRenderer.mm in Sources */,
+				4F4B8DD329F4161500AD6F08 /* Math.cpp in Sources */,
 				4F1B92EC29EF8A18000A8974 /* BirdRenderer.mm in Sources */,
 				4FB90AF629F03D7500EE37A4 /* DynamicMTKView.mm in Sources */,
 			);

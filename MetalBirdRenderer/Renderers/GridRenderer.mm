@@ -83,10 +83,10 @@ void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
 std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
     std::array<simd_float2, GridRenderer::count()> results {};
     
-    std::float_t unit = 1.f / GridRenderer::length;
+    std::float_t unit = std::powf(GridRenderer::length, -1.f);
     
     for (std::int16_t i = 0; std::cmp_less(i, std::div(GridRenderer::count(), 2).quot); i = i + 2) {
-        std::float_t coord = -1.f + unit * static_cast<std::float_t>(i + 2);
+        std::float_t coord = std::fmaf(unit, static_cast<std::float_t>(i + 2), -1.f);
         
         results.at(i) = simd_make_float2(-1.f, coord);
         results.at(i + 1) = simd_make_float2(1.f, coord);

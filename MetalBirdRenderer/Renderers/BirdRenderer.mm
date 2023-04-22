@@ -17,6 +17,7 @@ BirdRenderer::BirdRenderer(
                            NSError * _Nullable __autoreleasing * error
                            ) : BaseRenderer(mtkView, device, library, error)
 {
+//    ProjectileMotion::y(3.f, <#std::float_t radian#>, <#std::float_t gravity#>, <#std::float_t time#>)
     MTLFunctionDescriptor *vertexFunctionDescriptor = [MTLFunctionDescriptor functionDescriptor];
     vertexFunctionDescriptor.name = @"bird::vertex_main";
     
@@ -53,17 +54,6 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
 //        this->timer += 0.5;
 //        this->readyToJump.store(false);
 //    }
-    if (this->increasing) {
-        this->timer += 0.007f;
-        if (this->timer >= 0.7f) {
-            this->increasing = false;
-        }
-    } else {
-        this->timer -= 0.007f;
-        if (this->timer <= -0.7f) {
-            this->increasing = true;
-        }
-    }
     
     id<MTLBuffer> timerBuffer = [this->device newBufferWithBytes:&this->timer length:sizeof(std::float_t) options:0];
     
@@ -75,6 +65,5 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
 }
 
 void BirdRenderer::jump() {
-    std::printf("Clicked!");
-//    this->readyToJump.store(true);
+    this->readyToJump.store(true);
 }

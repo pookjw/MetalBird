@@ -10,8 +10,15 @@ import SwiftUI
 @main
 struct MetalBirdApp: App {
     var body: some Scene {
-        WindowGroup {
+#if os(iOS)
+        WindowGroup { 
             ContentView()
         }
+#elseif os(macOS)
+        Window("", id: "") {
+            ContentView()
+        }
+        .windowStyle(.hiddenTitleBar)
+#endif
     }
 }

@@ -6,6 +6,7 @@
 //
 
 #import <MetalBirdRenderer/BaseRenderer.hpp>
+#import <MetalBirdRenderer/ProjectileMotion.hpp>
 #import <array>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -27,7 +28,6 @@ private:
     static constinit const std::float_t angle;
     id<MTLRenderPipelineState> pipelineState;
     std::atomic<bool> readyToJump;
-    bool increasing;
     std::float_t timer;
 };
 

@@ -11,13 +11,13 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 static NSNotificationName const __UIWindowSceneDidChangeScreenNotification = @"__UIWindowSceneDidChangeScreenNotification";
 
 @interface UIWindowScene (DidChangeScreenNotification)
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif
