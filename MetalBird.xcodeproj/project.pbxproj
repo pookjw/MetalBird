@@ -14,6 +14,9 @@
 		4F4B8DC729F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DC529F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm */; };
 		4F4B8DD329F4161500AD6F08 /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DD129F4161500AD6F08 /* Math.cpp */; };
 		4F4B8DD429F4161500AD6F08 /* Math.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4F4B8DD229F4161500AD6F08 /* Math.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4F4B8DD729F509A600AD6F08 /* ObstacleRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DD529F509A600AD6F08 /* ObstacleRenderer.mm */; };
+		4F4B8DD829F509A600AD6F08 /* ObstacleRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4F4B8DD629F509A600AD6F08 /* ObstacleRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
+		4F4B8DDA29F50A8D00AD6F08 /* obstacle_shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B8DD929F50A8D00AD6F08 /* obstacle_shader.metal */; };
 		4F99489C29EC39F300A7B116 /* MetalBirdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */; };
 		4F99489E29EC39F300A7B116 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99489D29EC39F300A7B116 /* ContentView.swift */; };
 		4F9948A029EC39F400A7B116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F99489F29EC39F400A7B116 /* Assets.xcassets */; };
@@ -74,6 +77,9 @@
 		4F4B8DC529F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject+Foundation_IvarDescription.mm"; sourceTree = "<group>"; };
 		4F4B8DD129F4161500AD6F08 /* Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
 		4F4B8DD229F4161500AD6F08 /* Math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Math.hpp; sourceTree = "<group>"; };
+		4F4B8DD529F509A600AD6F08 /* ObstacleRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ObstacleRenderer.mm; sourceTree = "<group>"; };
+		4F4B8DD629F509A600AD6F08 /* ObstacleRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ObstacleRenderer.hpp; sourceTree = "<group>"; };
+		4F4B8DD929F50A8D00AD6F08 /* obstacle_shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = obstacle_shader.metal; sourceTree = "<group>"; };
 		4F99489829EC39F300A7B116 /* MetalBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F99489B29EC39F300A7B116 /* MetalBirdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalBirdApp.swift; sourceTree = "<group>"; };
 		4F99489D29EC39F300A7B116 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -217,6 +223,8 @@
 				4FAEC7B829ED9C75005B696C /* GridRenderer.mm */,
 				4F1B92EB29EF8A18000A8974 /* BirdRenderer.hpp */,
 				4F1B92EA29EF8A18000A8974 /* BirdRenderer.mm */,
+				4F4B8DD629F509A600AD6F08 /* ObstacleRenderer.hpp */,
+				4F4B8DD529F509A600AD6F08 /* ObstacleRenderer.mm */,
 			);
 			path = Renderers;
 			sourceTree = "<group>";
@@ -226,6 +234,7 @@
 			children = (
 				4FAEC7AA29ED8D91005B696C /* grid_shader.metal */,
 				4FAEC7A829ED8D89005B696C /* bird_shader.metal */,
+				4F4B8DD929F50A8D00AD6F08 /* obstacle_shader.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -258,6 +267,7 @@
 			files = (
 				4FB90AEA29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.hpp in Headers */,
 				4F1B92ED29EF8A18000A8974 /* BirdRenderer.hpp in Headers */,
+				4F4B8DD829F509A600AD6F08 /* ObstacleRenderer.hpp in Headers */,
 				4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */,
 				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
 				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
@@ -385,9 +395,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FAEC7A729ED8D5D005B696C /* GameRenderer.mm in Sources */,
+				4F4B8DD729F509A600AD6F08 /* ObstacleRenderer.mm in Sources */,
 				4F4B8DC729F4069500AD6F08 /* NSObject+Foundation_IvarDescription.mm in Sources */,
 				4FAEC7A929ED8D89005B696C /* bird_shader.metal in Sources */,
 				4FAEC7AB29ED8D91005B696C /* grid_shader.metal in Sources */,
+				4F4B8DDA29F50A8D00AD6F08 /* obstacle_shader.metal in Sources */,
 				4FAEC7BA29ED9C75005B696C /* GridRenderer.mm in Sources */,
 				4FB90AEB29F03C3A00EE37A4 /* UIWindowScene+DidChangeScreenNotification.mm in Sources */,
 				4FAEC7B629ED9ACD005B696C /* BaseRenderer.mm in Sources */,
