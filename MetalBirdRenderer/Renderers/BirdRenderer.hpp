@@ -27,7 +27,7 @@ public:
 private:
     id<MTLRenderPipelineState> pipelineState;
     std::atomic<bool> readyToJump;
-    std::atomic<std::float_t> lastX;
+    std::atomic<std::float_t> time;
     std::atomic<std::float_t> lastY;
     std::atomic<std::optional<std::float_t>> baseY;
 };

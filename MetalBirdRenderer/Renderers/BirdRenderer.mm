@@ -53,25 +53,29 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
     float y;
     
     if (this->readyToJump.load()) {
-        float x = std::fmaf(this->lastX.load(), 1.f, 0.1f);
+        float time = std::fmaf(this->time.load(), 1.f, 0.1f);
         
-        y = std::fmaf(-1.f, 1.f, Math::freeFall(0.4f, 0.1f, x));
+        y = std::fmaf(-1.f, 1.f, Math::projectileMotionY(0.3f, 0.1f, time));
         
         std::optional<std::float_t> baseY = this->baseY.load();
         if (baseY != std::nullopt) {
             y += baseY.value() + 1.f;
         }
         
-        // TODO: https://en.wikipedia.org/wiki/Elastic_collision
-        y = std::fmin(y, 1.f);
-        
-        if (std::islessequal(y, -1.f)) {
+        if (std::isgreaterequal(y, 1.f)) {
+            time = 3.f; // time when projection reached to the highest point. (t = v / g)
+            
+            // 0.55f = the highest point is 0.45f. 1.f - 0.45f = 0.55f.
+            y = 1.f + 0.55f + std::fmaf(-1.f, 1.f, Math::projectileMotionY(0.3f, 0.1f, time));
+            this->time.store(time);
+            this->baseY.store(0.55f);
+        } else if (std::islessequal(y, -1.f)) {
             y = -1.f;
-            this->lastX.store(0.f);
+            this->time.store(0.f);
             this->readyToJump.store(false);
             this->baseY.store(std::nullopt);
         } else {
-            this->lastX.store(x);
+            this->time.store(time);
         }
         
         this->lastY.store(y);
@@ -82,7 +86,7 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
     bird::data data = {
         .drawable_size = simd_make_float2(size.width, size.height),
         .relative_point_size = 0.05f,
-        .relative_x = 0.f,
+        .relative_x = -0.7f,
         .relative_y = y
     };
     
@@ -96,7 +100,7 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
 }
 
 void BirdRenderer::jump() {
-    this->lastX.store(0.f);
+    this->time.store(0.f);
     
     if (this->readyToJump.load()) {
         this->baseY.store(this->lastY.load());
