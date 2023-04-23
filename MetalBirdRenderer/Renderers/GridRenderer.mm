@@ -7,6 +7,8 @@
 
 #import <MetalBirdRenderer/GridRenderer.hpp>
 #import <cmath>
+#import <ranges>
+#import <algorithm>
 
 constinit const std::int16_t GridRenderer::length = GRID_RENDERER_LENGTH;
 
@@ -100,9 +102,15 @@ std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
 std::array<std::uint16_t, GRID_RENDERER_COUNT> GridRenderer::makeIndices() {
     std::array<std::uint16_t, GridRenderer::count()> results {};
     
-    for (std::uint16_t i = 0; std::cmp_less(i, GridRenderer::count()); i++) {
-        results.at(i) = i;
-    }
+    std::uint16_t value = 0;
+    std::generate(results.begin(), results.end(), [&value]() {
+        return value++;
+    });
+    
+//    std::for_each(results.begin(), results.end(), [&results](std::uint16_t &value) {
+//        std::uint16_t index = &value - results.data();
+//        results.at(index) = index;
+//    });
     
     return results;
 }

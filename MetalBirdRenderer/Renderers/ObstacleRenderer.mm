@@ -6,7 +6,13 @@
 //
 
 #import <MetalBirdRenderer/ObstacleRenderer.hpp>
+#import <algorithm>
 #import <iostream>
+#import <ranges>
+
+constinit const std::float_t ObstacleRenderer::obstaclesSpacing = 100.f;
+const std::float_t ObstacleRenderer::holeSpacingRatio = std::powf(-3.f, -1.f);
+constinit const std::float_t ObstacleRenderer::obstacleWidth = 50.f;
 
 ObstacleRenderer::ObstacleRenderer(
                                    MTKView *mtkView,
@@ -40,10 +46,12 @@ ObstacleRenderer::ObstacleRenderer(
     id<MTLRenderPipelineState> pipelineState = [device newRenderPipelineStateWithDescriptor:pipelineDescriptor error:error];
     
     this->pipelineState = pipelineState;
+    this->obstacles = std::shared_ptr<std::vector<simd_float2>>(new std::vector<simd_float2>());
 }
 
 void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size) {
     BaseRenderer::drawInRenderEncoder(renderEncoder, size);
     
-    // TODO
+    std::int16_t obstaclesCount = static_cast<std::int16_t>(std::fmaf(size.width, std::powf(std::fmaf(ObstacleRenderer::obstaclesSpacing, 1.f, ObstacleRenderer::obstaclesSpacing), -1.f), 0.f));
+    
 }

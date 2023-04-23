@@ -50,10 +50,10 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
     
     [renderEncoder setRenderPipelineState:this->pipelineState];
     
-    float y;
+    std::float_t y;
     
     if (this->readyToJump.load()) {
-        float time = std::fmaf(this->time.load(), 1.f, 0.1f);
+        std::float_t time = std::fmaf(this->time.load(), 1.f, 0.1f);
         
         y = std::fmaf(-1.f, 1.f, Math::projectileMotionY(0.3f, 0.1f, time));
         
@@ -64,10 +64,11 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
         
         if (std::isgreaterequal(y, 1.f)) {
             time = 3.f; // time when projection reached to the highest point. (t = v / g)
+            y = 1.f;
+            
+            this->time.store(time);
             
             // 0.55f = the highest point is 0.45f. 1.f - 0.45f = 0.55f.
-            y = 1.f + 0.55f + std::fmaf(-1.f, 1.f, Math::projectileMotionY(0.3f, 0.1f, time));
-            this->time.store(time);
             this->baseY.store(0.55f);
         } else if (std::islessequal(y, -1.f)) {
             y = -1.f;
@@ -104,7 +105,7 @@ void BirdRenderer::jump() {
     
     if (this->readyToJump.load()) {
         this->baseY.store(this->lastY.load());
+    } else {
+        this->readyToJump.store(true);
     }
-    
-    this->readyToJump.store(true);
 }
