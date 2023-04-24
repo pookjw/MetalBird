@@ -11,8 +11,8 @@ using namespace metal;
 
 namespace bird {
     struct vertex_out {
-        float4 position [[position]];
-        float pointSize [[point_size]];
+        const float4 position [[position]];
+        const float pointSize [[point_size]];
     };
     
     vertex vertex_out vertex_main(

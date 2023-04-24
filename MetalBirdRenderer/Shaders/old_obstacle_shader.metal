@@ -9,16 +9,20 @@
 using namespace metal;
 
 namespace old_obstacle {
+    struct vertex_in {
+        const simd_float2 position [[attribute(0)]];
+    };
+    
     struct vertex_out {
-        float4 position [[position]];
+        const float4 position [[position]];
     };
     
     vertex vertex_out vertex_main(
-                                  simd_float2 position [[attribute(0)]] [[stage_in]]
+                                  vertex_in in [[stage_in]]
                                   )
     {
         return {
-            .position = float4(position, 0.f, 1.f)
+            .position = float4(in.position, 0.f, 1.f)
         };
     }
     

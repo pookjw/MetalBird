@@ -9,6 +9,10 @@
 
 namespace obstacle {
 struct data {
-    simd_float2 drawable_size;
+    const simd_float2 drawable_size;
+    const float obstacles_absolute_spacing;
+    const float hole_spacing_ratio;
+    const float absolute_width;
+    const float time;
 };
 }

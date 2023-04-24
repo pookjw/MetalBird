@@ -6,8 +6,10 @@
 //
 
 #import <MetalBirdRenderer/ObstacleRenderer.hpp>
+#import <MetalBirdRenderer/obstacle_common.hpp>
+#import <iostream>
 
-constinit const std::float_t ObstacleRenderer::obstaclesAbsoluteSpacing = 100.f;
+constinit const std::float_t ObstacleRenderer::obstaclesAbsoluteSpacing = 500.f;
 const std::float_t ObstacleRenderer::holeSpacingRatio = std::powf(3.f, -1.f);
 constinit const std::float_t ObstacleRenderer::obstacleAbsoluteWidth = 50.f;
 
@@ -37,10 +39,7 @@ ObstacleRenderer::ObstacleRenderer(
     pipelineDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
     
     MTLVertexDescriptor *vertexDescriptor = [MTLVertexDescriptor new];
-    vertexDescriptor.attributes[0].format = MTLVertexFormatFloat2;
-    vertexDescriptor.attributes[0].offset = 0;
-    vertexDescriptor.attributes[0].bufferIndex = 0;
-    vertexDescriptor.layouts[0].stride = sizeof(simd_float2);
+    // TODO
     
     pipelineDescriptor.vertexDescriptor = vertexDescriptor;
     
@@ -52,4 +51,9 @@ ObstacleRenderer::ObstacleRenderer(
 void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size) {
     BaseRenderer::drawInRenderEncoder(renderEncoder, size);
     
+    const std::uint16_t obstaclesCount = static_cast<std::uint16_t>(std::ceilf(std::fmaf(std::fmaf(size.width, 1.f, std::fmaf(ObstacleRenderer::obstacleAbsoluteWidth, -1.f, 0.f)), std::powf(std::fmaf(ObstacleRenderer::obstacleAbsoluteWidth, 1.f, ObstacleRenderer::obstaclesAbsoluteSpacing), -1.f), 0.f)));
+    
+    const obstacle::data data = {
+        
+    };
 }

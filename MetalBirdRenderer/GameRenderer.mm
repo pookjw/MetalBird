@@ -9,6 +9,7 @@
 #import <MetalBirdRenderer/constants.h>
 #import <MetalBirdRenderer/GridRenderer.hpp>
 #import <MetalBirdRenderer/BirdRenderer.hpp>
+#import <MetalBirdRenderer/Old_ObstacleRenderer.hpp>
 #import <MetalBirdRenderer/ObstacleRenderer.hpp>
 #import <memory>
 #import <vector>
@@ -76,6 +77,7 @@
         
         self.renderers = std::shared_ptr<std::vector<std::shared_ptr<BaseRenderer>>>(new std::vector<std::shared_ptr<BaseRenderer>> {
             std::shared_ptr<GridRenderer>(new GridRenderer(mtkView, device, library, &error)),
+            std::shared_ptr<Old_ObstacleRenderer>(new Old_ObstacleRenderer(mtkView, device, library, &error)),
             std::shared_ptr<ObstacleRenderer>(new ObstacleRenderer(mtkView, device, library, &error)),
             std::shared_ptr<BirdRenderer>(new BirdRenderer(mtkView, device, library, &error))
         });

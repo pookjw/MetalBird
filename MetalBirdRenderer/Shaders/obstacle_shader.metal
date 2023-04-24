@@ -6,19 +6,20 @@
 //
 
 #include <metal_stdlib>
+#import <MetalBirdRenderer/obstacle_common.hpp>
 using namespace metal;
 
 namespace obstacle {
     struct vertex_out {
-        float4 position [[position]];
+        const float4 position [[position]];
     };
     
     vertex vertex_out vertex_main(
-                                  simd_float2 position [[attribute(0)]] [[stage_in]]
+                                  constant obstacle::data &data [[buffer(0)]]
                                   )
     {
         return {
-            .position = float4(position, 0.f, 1.f)
+            .position = float4(0.f, 0.f, 0.f, 1.f)
         };
     }
     

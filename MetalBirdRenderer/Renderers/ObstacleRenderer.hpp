@@ -30,6 +30,7 @@ private:
     static constinit const std::float_t obstacleAbsoluteWidth;
     
     id<MTLRenderPipelineState> pipelineState;
+    std::float_t time;
 };
 
 NS_HEADER_AUDIT_END(nullability, sendability)
