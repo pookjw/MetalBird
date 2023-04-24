@@ -1,14 +1,14 @@
 //
-//  obstacle_shader.metal
+//  old_obstacle_shader.metal
 //  MetalBirdRenderer
 //
-//  Created by Jinwoo Kim on 4/24/23.
+//  Created by Jinwoo Kim on 4/23/23.
 //
 
 #include <metal_stdlib>
 using namespace metal;
 
-namespace obstacle {
+namespace old_obstacle {
     struct vertex_out {
         float4 position [[position]];
     };
