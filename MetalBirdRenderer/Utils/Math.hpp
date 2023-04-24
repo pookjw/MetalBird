@@ -15,8 +15,4 @@ const std::float_t projectileMotionY(
                                      const std::float_t gravity,
                                      const std::float_t time
                                      );
-const std::float_t freeFall(
-                            const std::float_t gravity,
-                            const std::float_t time
-                            );
 };

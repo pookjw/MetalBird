@@ -76,8 +76,8 @@
         
         self.renderers = std::shared_ptr<std::vector<std::shared_ptr<BaseRenderer>>>(new std::vector<std::shared_ptr<BaseRenderer>> {
             std::shared_ptr<GridRenderer>(new GridRenderer(mtkView, device, library, &error)),
-            std::shared_ptr<BirdRenderer>(new BirdRenderer(mtkView, device, library, &error)),
-            std::shared_ptr<ObstacleRenderer>(new ObstacleRenderer(mtkView, device, library, &error))
+            std::shared_ptr<ObstacleRenderer>(new ObstacleRenderer(mtkView, device, library, &error)),
+            std::shared_ptr<BirdRenderer>(new BirdRenderer(mtkView, device, library, &error))
         });
         if (error) {
             completionHandler(error);
@@ -108,13 +108,17 @@
 }
 
 - (void)renderWithView:(MTKView *)mtkView size:(std::optional<CGSize>)size {
+    std::optional<CGSize> *_size = new std::optional<CGSize>;
+    std::memcpy(_size, &size, sizeof(CGSize));
+    
     [self.queue addOperationWithBlock:^{
         id<MTLCommandBuffer> commandBuffer = self->_commandQueue.commandBuffer;
         MTLRenderPassDescriptor * _Nullable descriptor = mtkView.currentRenderPassDescriptor;
         if (descriptor == nil) return;
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
         id<CAMetalDrawable> drawable = mtkView.currentDrawable;
-        CGSize drawableSize = size.value_or([drawable layer].drawableSize);
+        CGSize drawableSize = _size->value_or([drawable layer].drawableSize);
+        delete _size;
         
         std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&renderEncoder, &drawableSize](std::shared_ptr<BaseRenderer> ptr) {
             @autoreleasepool {

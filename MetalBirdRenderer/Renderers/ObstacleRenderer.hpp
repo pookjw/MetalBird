@@ -25,9 +25,9 @@ public:
     
     void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size);
 private:
-    static constinit const std::float_t obstaclesSpacing;
+    static constinit const std::float_t obstaclesAbsoluteSpacing;
     static const std::float_t holeSpacingRatio;
-    static constinit const std::float_t obstacleWidth;
+    static constinit const std::float_t obstacleAbsoluteWidth;
     
     id<MTLRenderPipelineState> pipelineState;
     std::shared_ptr<std::vector<simd_float2>> obstacles;

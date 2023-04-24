@@ -25,11 +25,3 @@ const std::float_t Math::projectileMotionY(
 {
     return std::fmaf(vy, time, std::fmaf(std::powf(-2.f, -1.f), std::fmaf(gravity, std::powf(time, 2.f), 0.f), 0.f));
 }
-
-const std::float_t Math::freeFall(
-                                  const std::float_t gravity,
-                                  const std::float_t time
-                                  )
-{
-    return std::fmaf(std::powf(-2.f, -1.f), std::fmaf(gravity, std::powf(time, 2.f), 0.f), 0.f);
-}

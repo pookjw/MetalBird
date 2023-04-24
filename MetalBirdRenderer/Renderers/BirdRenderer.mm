@@ -57,7 +57,7 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
         
         y = std::fmaf(-1.f, 1.f, Math::projectileMotionY(0.3f, 0.1f, time));
         
-        std::optional<std::float_t> baseY = this->baseY.load();
+        const std::optional<std::float_t> baseY = this->baseY.load();
         if (baseY != std::nullopt) {
             y += baseY.value() + 1.f;
         }
@@ -84,7 +84,7 @@ void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
         y = -1.f;
     }
     
-    bird::data data = {
+    const bird::data data = {
         .drawable_size = simd_make_float2(size.width, size.height),
         .relative_point_size = 0.05f,
         .relative_x = -0.7f,

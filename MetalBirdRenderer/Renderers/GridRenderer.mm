@@ -9,6 +9,7 @@
 #import <cmath>
 #import <ranges>
 #import <algorithm>
+#import <tuple>
 
 constinit const std::int16_t GridRenderer::length = GRID_RENDERER_LENGTH;
 
@@ -74,10 +75,10 @@ void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
     for (std::int16_t i = 0; std::cmp_less(i, std::div(GridRenderer::count(), 2).quot); i++) {
         @autoreleasepool {
             [renderEncoder drawIndexedPrimitives:MTLPrimitiveTypeLine
-                                indexCount:2
-                                 indexType:MTLIndexTypeUInt16
-                               indexBuffer:this->indicesBuffer
-                         indexBufferOffset:sizeof(std::tuple_element<0, decltype(this->indices)>::type) * i * 2];
+                                      indexCount:2
+                                       indexType:MTLIndexTypeUInt16
+                                     indexBuffer:this->indicesBuffer
+                               indexBufferOffset:sizeof(std::tuple_element<0, decltype(this->indices)>::type) * i * 2];
         }
     }
 }
@@ -85,10 +86,10 @@ void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder
 std::array<simd_float2, GRID_RENDERER_COUNT> GridRenderer::makeCoords() {
     std::array<simd_float2, GridRenderer::count()> results {};
     
-    std::float_t unit = std::powf(GridRenderer::length, -1.f);
+    const std::float_t unit = std::powf(GridRenderer::length, -1.f);
     
     for (std::int16_t i = 0; std::cmp_less(i, std::div(GridRenderer::count(), 2).quot); i = i + 2) {
-        std::float_t coord = std::fmaf(unit, static_cast<std::float_t>(i + 2), -1.f);
+        const std::float_t coord = std::fmaf(unit, static_cast<std::float_t>(i + 2), -1.f);
         
         results.at(i) = simd_make_float2(-1.f, coord);
         results.at(i + 1) = simd_make_float2(1.f, coord);
