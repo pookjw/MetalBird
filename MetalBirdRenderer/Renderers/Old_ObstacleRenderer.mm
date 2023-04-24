@@ -35,6 +35,7 @@ Old_ObstacleRenderer::Old_ObstacleRenderer(
     if (*error) return;
     
     MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
+    pipelineDescriptor.rasterSampleCount = mtkView.sampleCount;
     pipelineDescriptor.vertexFunction = vertexFunction;
     pipelineDescriptor.fragmentFunction = fragmentFunction;
     pipelineDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;

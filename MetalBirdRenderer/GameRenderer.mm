@@ -111,14 +111,16 @@
     CGSize drawableSize = size.value_or([mtkView.currentDrawable layer].drawableSize);
     
     [self.queue addOperationWithBlock:^{
-        id<MTLCommandBuffer> commandBuffer = self->_commandQueue.commandBuffer;
-        MTLRenderPassDescriptor * _Nullable descriptor = mtkView.currentRenderPassDescriptor;
-        descriptor.renderTargetWidth = drawableSize.width;
-        descriptor.renderTargetHeight = drawableSize.height;
-        if (descriptor == nil) return;
-        id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
+        MTLCommandBufferDescriptor *commandBufferDescriptor = [MTLCommandBufferDescriptor new];
+        commandBufferDescriptor.retainedReferences = YES;
         
-        std::for_each(self.renderers.get()->begin(), self.renderers.get()->end(), [&renderEncoder, &drawableSize](std::shared_ptr<BaseRenderer> ptr) {
+        id<MTLCommandBuffer> commandBuffer = [self->_commandQueue commandBufferWithDescriptor:commandBufferDescriptor];
+        MTLRenderPassDescriptor * _Nullable renderPassDescriptor = mtkView.currentRenderPassDescriptor;
+        if (renderPassDescriptor == nil) return;
+        
+        id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
+        
+        std::for_each(self->_renderers.get()->begin(), self->_renderers.get()->end(), [&renderEncoder, &drawableSize](std::shared_ptr<BaseRenderer> ptr) {
             @autoreleasepool {
                 ptr.get()->drawInRenderEncoder(renderEncoder, drawableSize);
             }
@@ -126,7 +128,13 @@
         
         [renderEncoder endEncoding];
         [commandBuffer presentDrawable:mtkView.currentDrawable];
+        
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        [commandBuffer addCompletedHandler:^(id<MTLCommandBuffer> _Nonnull buffer) {
+            dispatch_semaphore_signal(semaphore);
+        }];
         [commandBuffer commit];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     }];
 }
 

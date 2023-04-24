@@ -41,6 +41,7 @@ GridRenderer::GridRenderer(
     std::array<ushort, GridRenderer::count()> indices = this->makeIndices();
     
     MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
+    pipelineDescriptor.rasterSampleCount = mtkView.sampleCount;
     pipelineDescriptor.vertexFunction = vertexFunction;
     pipelineDescriptor.fragmentFunction = fragmentFunction;
     pipelineDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
