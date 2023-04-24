@@ -113,6 +113,8 @@
     [self.queue addOperationWithBlock:^{
         id<MTLCommandBuffer> commandBuffer = self->_commandQueue.commandBuffer;
         MTLRenderPassDescriptor * _Nullable descriptor = mtkView.currentRenderPassDescriptor;
+        descriptor.renderTargetWidth = drawableSize.width;
+        descriptor.renderTargetHeight = drawableSize.height;
         if (descriptor == nil) return;
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:descriptor];
         

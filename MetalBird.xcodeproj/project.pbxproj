@@ -46,6 +46,7 @@
 		4FD2A38A29F6B64400863031 /* ObstacleRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2A38829F6B64400863031 /* ObstacleRenderer.mm */; };
 		4FD2A38B29F6B64400863031 /* ObstacleRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FD2A38929F6B64400863031 /* ObstacleRenderer.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		4FD2A38D29F6B6DB00863031 /* obstacle_shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2A38C29F6B6DB00863031 /* obstacle_shader.metal */; };
+		4FD2A38F29F6B77100863031 /* obstacle_common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4FD2A38E29F6B75500863031 /* obstacle_common.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		4FD2A38829F6B64400863031 /* ObstacleRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ObstacleRenderer.mm; sourceTree = "<group>"; };
 		4FD2A38929F6B64400863031 /* ObstacleRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ObstacleRenderer.hpp; sourceTree = "<group>"; };
 		4FD2A38C29F6B6DB00863031 /* obstacle_shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = obstacle_shader.metal; sourceTree = "<group>"; };
+		4FD2A38E29F6B75500863031 /* obstacle_common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = obstacle_common.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				4FD2A38629F443DA00863031 /* bird_common.hpp */,
+				4FD2A38E29F6B75500863031 /* obstacle_common.hpp */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				4F1B92ED29EF8A18000A8974 /* BirdRenderer.hpp in Headers */,
 				4F4B8DD829F509A600AD6F08 /* Old_ObstacleRenderer.hpp in Headers */,
 				4FB90AF529F03D7500EE37A4 /* DynamicMTKView.h in Headers */,
+				4FD2A38F29F6B77100863031 /* obstacle_common.hpp in Headers */,
 				4FAEC7A529ED8D5D005B696C /* constants.h in Headers */,
 				4FAEC7BB29ED9C75005B696C /* GridRenderer.hpp in Headers */,
 				4FAEC7A629ED8D5D005B696C /* GameRenderer.h in Headers */,
