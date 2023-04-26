@@ -77,7 +77,7 @@
         
         self.renderers = std::shared_ptr<std::vector<std::shared_ptr<BaseRenderer>>>(new std::vector<std::shared_ptr<BaseRenderer>> {
             std::shared_ptr<GridRenderer>(new GridRenderer(mtkView, device, library, &error)),
-            std::shared_ptr<Old_ObstacleRenderer>(new Old_ObstacleRenderer(mtkView, device, library, &error)),
+//            std::shared_ptr<Old_ObstacleRenderer>(new Old_ObstacleRenderer(mtkView, device, library, &error)),
             std::shared_ptr<ObstacleRenderer>(new ObstacleRenderer(mtkView, device, library, &error)),
             std::shared_ptr<BirdRenderer>(new BirdRenderer(mtkView, device, library, &error))
         });
@@ -110,7 +110,8 @@
 }
 
 - (void)renderWithView:(MTKView *)mtkView size:(std::optional<CGSize>)size {
-    CGSize drawableSize = size.value_or([mtkView.currentDrawable layer].drawableSize);
+    const CGSize drawableSize = size.value_or([mtkView.currentDrawable layer].drawableSize);
+    const NSUInteger frameRate = mtkView.preferredFramesPerSecond;
     
     [self.queue addOperationWithBlock:^{
         MTLCommandBufferDescriptor *commandBufferDescriptor = [MTLCommandBufferDescriptor new];
@@ -122,9 +123,9 @@
         
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
         
-        std::for_each(self->_renderers.get()->begin(), self->_renderers.get()->end(), [&renderEncoder, &drawableSize](std::shared_ptr<BaseRenderer> ptr) {
+        std::for_each(self->_renderers.get()->begin(), self->_renderers.get()->end(), [renderEncoder, drawableSize, frameRate](std::shared_ptr<BaseRenderer> ptr) {
             @autoreleasepool {
-                ptr.get()->drawInRenderEncoder(renderEncoder, drawableSize);
+                ptr.get()->drawInRenderEncoder(renderEncoder, drawableSize, frameRate);
             }
         });
         

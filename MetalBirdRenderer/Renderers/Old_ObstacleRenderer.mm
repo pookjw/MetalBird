@@ -54,8 +54,8 @@ Old_ObstacleRenderer::Old_ObstacleRenderer(
     this->obstacles = std::shared_ptr<std::vector<simd_float2>>(new std::vector<simd_float2>());
 }
 
-void Old_ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size) {
-    BaseRenderer::drawInRenderEncoder(renderEncoder, size);
+void Old_ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond) {
+    BaseRenderer::drawInRenderEncoder(renderEncoder, size, screenFramesPerSecond);
     
     const std::int16_t obstaclesCount = static_cast<std::int16_t>(std::fmaf(size.width, std::powf(std::fmaf(Old_ObstacleRenderer::obstaclesAbsoluteSpacing, 1.f, Old_ObstacleRenderer::obstaclesAbsoluteSpacing), -1.f), 0.f));
     

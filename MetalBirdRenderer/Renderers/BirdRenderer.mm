@@ -46,15 +46,16 @@ BirdRenderer::BirdRenderer(
     this->pipelineState = pipelineState;
 }
 
-void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size) {
-    BaseRenderer::drawInRenderEncoder(renderEncoder, size);
+void BirdRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond) {
+    BaseRenderer::drawInRenderEncoder(renderEncoder, size, screenFramesPerSecond);
     
     [renderEncoder setRenderPipelineState:this->pipelineState];
     
     std::float_t y;
     
     if (this->readyToJump.load()) {
-        std::float_t time = std::fmaf(this->time.load(), 1.f, 0.1f);
+        std::float_t speed = std::fmaf(60.f, std::powf(screenFramesPerSecond, -1.f), 0.f);
+        std::float_t time = std::fmaf(this->time.load(), 1.f, std::fmaf(0.1f, speed, 0.f));
         
         y = std::fmaf(-1.f, 1.f, Math::projectileMotionY(0.3f, 0.1f, time));
         

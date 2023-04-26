@@ -23,7 +23,7 @@ public:
                  NSError * _Nullable __autoreleasing * error 
                  );
     
-    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size);
+    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond);
 private:
     static constinit const std::float_t obstaclesAbsoluteSpacing;
     static const std::float_t holeSpacingRatio;

@@ -14,5 +14,8 @@ struct data {
     const float hole_spacing_ratio;
     const float absolute_width;
     const float time;
+    const short index;
+    const bool is_upper;
+    const float offset;
 };
 }

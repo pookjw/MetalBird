@@ -22,7 +22,7 @@ public:
                  NSError * _Nullable __autoreleasing * error 
                  );
     
-    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size);
+    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond);
     void jump();
 private:
     id<MTLRenderPipelineState> pipelineState;

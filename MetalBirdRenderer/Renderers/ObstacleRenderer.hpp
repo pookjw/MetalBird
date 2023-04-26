@@ -7,7 +7,6 @@
 
 #import <MetalBirdRenderer/BaseRenderer.hpp>
 #import <vector>
-#import <array>
 #import <memory>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -23,7 +22,7 @@ public:
                      NSError * _Nullable __autoreleasing * error
                      );
     
-    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size);
+    void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond);
 private:
     static constinit const std::float_t obstaclesAbsoluteSpacing;
     static const std::float_t holeSpacingRatio;
@@ -31,6 +30,7 @@ private:
     
     id<MTLRenderPipelineState> pipelineState;
     std::float_t time;
+    std::shared_ptr<std::vector<std::float_t>> randomValues;
 };
 
 NS_HEADER_AUDIT_END(nullability, sendability)
