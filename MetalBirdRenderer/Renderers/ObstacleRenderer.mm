@@ -57,11 +57,7 @@ void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEnc
     // ((this->time) * size.width + size.width)
 //    const std::uint16_t obstaclesCount = static_cast<std::uint16_t>(std::ceilf(std::fmaf(std::fmaf(std::fmaf(this->time, size.width, size.width), 1.f, std::fmaf(ObstacleRenderer::obstaclesAbsoluteSpacing, -1.f, 0.f)), std::powf(std::fmaf(ObstacleRenderer::obstacleAbsoluteWidth, 1.f, ObstacleRenderer::obstaclesAbsoluteSpacing), -1.f), 0.f)));
     // TODO
-<<<<<<< HEAD
-    const std::uint16_t obstaclesCount = std::floorf((this->time * size.width + size.width - ObstacleRenderer::obstacleAbsoluteWidth) / (ObstacleRenderer::obstacleAbsoluteWidth + ObstacleRenderer::obstaclesAbsoluteSpacing));
-=======
     const std::uint16_t obstaclesCount = std::floorf((this->time * size.width + size.width) / (ObstacleRenderer::obstacleAbsoluteWidth + ObstacleRenderer::obstaclesAbsoluteSpacing));
->>>>>>> 47c47d06e44d4922a24aa18df59dddab8d339328
     
     std::cout << obstaclesCount << std::endl;
     
