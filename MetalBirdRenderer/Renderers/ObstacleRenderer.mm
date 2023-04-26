@@ -12,7 +12,7 @@
 #import <random>
 
 constinit const std::float_t ObstacleRenderer::obstaclesAbsoluteSpacing = 500.f;
-const std::float_t ObstacleRenderer::holeSpacingRatio = std::powf(3.f, -1.f);
+const std::float_t ObstacleRenderer::holeSpacingRatio = std::powf(2.f, -1.f);
 constinit const std::float_t ObstacleRenderer::obstacleAbsoluteWidth = 80.f;
 
 ObstacleRenderer::ObstacleRenderer(
@@ -84,7 +84,7 @@ void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEnc
     [renderEncoder setRenderPipelineState:this->pipelineState];
     [renderEncoder setTriangleFillMode:MTLTriangleFillModeFill];
     
-    const std::float_t speed = std::fmaf(60.f, std::powf(screenFramesPerSecond, -1.f), 0.f);
+    const std::float_t speed = std::fmaf(std::fmaf(60.f, std::powf(screenFramesPerSecond, -1.f), 0.f), std::fmaf(1800.f, std::powf(size.width, -1.f), 0.f), 0.f);
     this->time = std::fmaf(this->time, 1.f, std::fmaf(0.003f, speed, 0.f));
     
     std::vector<std::uint16_t> range (obstaclesCount * 2);
