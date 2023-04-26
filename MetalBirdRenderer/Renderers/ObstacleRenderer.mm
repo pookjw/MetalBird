@@ -54,12 +54,8 @@ ObstacleRenderer::ObstacleRenderer(
 void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond) {
     BaseRenderer::drawInRenderEncoder(renderEncoder, size, screenFramesPerSecond);
     
-    // ((this->time) * size.width + size.width)
-//    const std::uint16_t obstaclesCount = static_cast<std::uint16_t>(std::ceilf(std::fmaf(std::fmaf(std::fmaf(this->time, size.width, size.width), 1.f, std::fmaf(ObstacleRenderer::obstaclesAbsoluteSpacing, -1.f, 0.f)), std::powf(std::fmaf(ObstacleRenderer::obstacleAbsoluteWidth, 1.f, ObstacleRenderer::obstaclesAbsoluteSpacing), -1.f), 0.f)));
-    // TODO
-    const std::uint16_t obstaclesCount = std::floorf((this->time * size.width + size.width) / (ObstacleRenderer::obstacleAbsoluteWidth + ObstacleRenderer::obstaclesAbsoluteSpacing));
-    
-    std::cout << obstaclesCount << std::endl;
+    // 0.5f == converts [-1, 1] space to [0, 1] space.
+    std::uint16_t obstaclesCount = std::ceilf((size.width + size.width * this->time * 0.5f) / (ObstacleRenderer::obstacleAbsoluteWidth + ObstacleRenderer::obstaclesAbsoluteSpacing));
     
     //
     
@@ -70,15 +66,12 @@ void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEnc
     const std::uint16_t randomValueSize = this->randomValues.get()->size();
     if (randomValueSize < obstaclesCount) {
         const std::vector<std::uint16_t> range (obstaclesCount - randomValueSize);
-        std::cout << "A " << (obstaclesCount - randomValueSize) << std::endl;
-        
         std::for_each(range.cbegin(), range.cend(), [randomValues = this->randomValues.get(), randomValueSize, &distribution, &generator](std::uint16_t value) {
             std::float_t randomFloat = distribution(generator);
             
             randomValues->push_back(randomFloat);
         });
     } else if (obstaclesCount < randomValueSize) {
-        std::cout << "B " << (randomValueSize - obstaclesCount) << std::endl;
         const std::vector<std::uint16_t> range (randomValueSize - obstaclesCount);
         
         std::for_each(range.cbegin(), range.cend(), [randomValues = this->randomValues.get()](std::uint16_t value) {
@@ -91,12 +84,8 @@ void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEnc
     [renderEncoder setRenderPipelineState:this->pipelineState];
     [renderEncoder setTriangleFillMode:MTLTriangleFillModeFill];
     
-    std::float_t speed = std::fmaf(60.f, std::powf(screenFramesPerSecond, -1.f), 0.f);
+    const std::float_t speed = std::fmaf(60.f, std::powf(screenFramesPerSecond, -1.f), 0.f);
     this->time = std::fmaf(this->time, 1.f, std::fmaf(0.003f, speed, 0.f));
-    
-    if (std::isgreaterequal(this->time, std::fmaf(std::fmaf(std::fmaf(ObstacleRenderer::obstaclesAbsoluteSpacing, 1.f, ObstacleRenderer::obstacleAbsoluteWidth), std::powf(size.width, -1.f), 0.f), 2.f, 0.f))) {
-        this->time = 0.f;
-    }
     
     std::vector<std::uint16_t> range (obstaclesCount * 2);
     
@@ -122,4 +111,8 @@ void ObstacleRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEnc
                           vertexStart:0
                           vertexCount:6];
     });
+    
+    if (std::isgreaterequal(this->time, std::fmaf(std::fmaf(std::fmaf(ObstacleRenderer::obstaclesAbsoluteSpacing, 1.f, ObstacleRenderer::obstacleAbsoluteWidth), std::powf(size.width, -1.f), 0.f), 2.f, 0.f))) {
+        this->time = 0.f;
+    }
 }

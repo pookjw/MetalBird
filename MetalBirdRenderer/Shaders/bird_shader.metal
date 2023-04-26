@@ -27,7 +27,7 @@ namespace bird {
     }
     
     fragment float4 fragment_main(vertex_out out [[stage_in]]) {
-        return float4(0.7f, 0.3f, 1.f, 0.f);
+        return float4(0.7f, 1.f, 0.2f, 0.f);
     }
 };
 

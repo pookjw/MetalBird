@@ -19,11 +19,10 @@ namespace obstacle {
                                   const uint vertex_id [[vertex_id]]
                                   )
     {
-        const float obstacles_relative_spacing = data.obstacles_absolute_spacing / data.drawable_size.x;
-        const float relative_width = data.absolute_width / data.drawable_size.x;
+        const float obstacles_relative_spacing = 2.f * data.obstacles_absolute_spacing / data.drawable_size.x;
+        const float relative_width = 2.f * data.absolute_width / data.drawable_size.x;
         
-        // multiplying 2.f converts [0.f, 1.f] space to [-1.f, 1.f] space.
-        const float base_x = -1.f + 2.f * (obstacles_relative_spacing * (data.index + 1) + relative_width * data.index) - data.time;
+        const float base_x = -1.f + (obstacles_relative_spacing + relative_width) * data.index - data.time;
         
         float4 position;
         
@@ -87,6 +86,6 @@ namespace obstacle {
     }
     
     fragment float4 fragment_main(vertex_out out [[stage_in]]) {
-        return float4(0.8f, 0.f, 1.f, 0.f);
+        return float4(0.2f, 0.3f, 1.f, 0.f);
     }
 };
