@@ -66,8 +66,8 @@ GridRenderer::GridRenderer(
     this->indicesBuffer = indicesBuffer;
 }
 
-void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size) {
-    BaseRenderer::drawInRenderEncoder(renderEncoder, size);
+void GridRenderer::drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond) {
+    BaseRenderer::drawInRenderEncoder(renderEncoder, size, screenFramesPerSecond);
     
     [renderEncoder setRenderPipelineState:this->pipelineState];
     

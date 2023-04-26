@@ -18,7 +18,7 @@ public:
                  NSError * _Nullable __autoreleasing * error
                  );
     
-    virtual void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size);
+    virtual void drawInRenderEncoder(id<MTLRenderCommandEncoder> renderEncoder, CGSize size, NSUInteger screenFramesPerSecond);
 protected:
     MTKView *mtkView;
     id<MTLDevice> device;
