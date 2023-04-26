@@ -7,7 +7,6 @@
 
 #import <MetalBirdRenderer/BaseRenderer.hpp>
 #import <vector>
-#import <array>
 #import <memory>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -31,6 +30,7 @@ private:
     
     id<MTLRenderPipelineState> pipelineState;
     std::float_t time;
+    std::shared_ptr<std::vector<std::float_t>> randomValues;
 };
 
 NS_HEADER_AUDIT_END(nullability, sendability)
